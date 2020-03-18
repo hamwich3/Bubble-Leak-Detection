@@ -1,0 +1,984 @@
+
+\ ********************** PER File **********************
+
+?EXISTS DL.STAT SWAP DROP .IF 1 DL.STAT .THEN
+_END NEW $$$.RUN FORGET $$$.RUN
+GetPersistentTop  **GPP*Vision*1.0**
+1 10 -2147483648 $TABLE {stPublicListOfStrategyTags 
+PersistentMAKECHECK
+
+\ ********************** CRN File **********************
+
+_END NEW $$$.RUN
+: FILENAME  ." GPP Vision 1.0 " ;
+: FILENAME>$ " GPP Vision 1.0" SWAP $MOVE ;
+1 0 $VAR *_HSV_SEMA 
+1024 0 $VAR *_HSV_TEMP 
+200 0 $VAR *_HSV_INIT_IO 
+0 IVAR ^_HNV_INIT_IO 
+0 TASK  &_INIT_IO
+0 TASK &EMOWatchdog
+0 TASK &Powerup
+0 TASK &RunTest
+0 FVAR ^Af_AveragingTime
+0 IVAR ^bAirFill
+0 IVAR ^bBumpPressure
+0 IVAR ^bFail1
+0 IVAR ^bFail2
+0 IVAR ^bFail3
+0 IVAR ^bFail4
+0 IVAR ^bFail5
+0 IVAR ^bFail6
+0 IVAR ^bFail7
+0 IVAR ^bFail8
+0 IVAR ^bFlash
+0 IVAR ^bHeadDownAbort
+0 IVAR ^bPass1
+0 IVAR ^bPass2
+0 IVAR ^bPass3
+0 IVAR ^bPass4
+0 IVAR ^bPass5
+0 IVAR ^bPass6
+0 IVAR ^bPass7
+0 IVAR ^bPass8
+0 IVAR ^bPressurize
+0 IVAR ^bStartTest
+0 IVAR ^bStopTest
+0 IVAR ^bTareVisionSystem
+0 IVAR ^bTesting
+0 IVAR ^bVisionRunning
+0 IVAR ^bVisionSystemAbort
+0 IVAR ^bVisionSystemRunning
+0 IVAR ^bWatchdog
+0 IVAR ^bWatchdogExpired
+0 FVAR ^fAirTarget
+0 FVAR ^fBleedPressure
+0 FVAR ^fBoost
+0 FVAR ^fBumpPercent
+0 FVAR ^fPercTargetPressure
+0 FVAR ^fPistonRatio
+0 FVAR ^fPressure
+0 FVAR ^fPressureOffset
+0 FVAR ^fPressureSampleTime
+0 FVAR ^fPressureTotals
+0 FVAR ^fRegVal
+0 FVAR ^fStabAveragingTotal
+0 FVAR ^fStabilizedPressure
+0 FVAR ^fStabilizedPressureLast
+0 FVAR ^fStabPressureDiff
+0 FVAR ^fStopPercent
+0 FVAR ^fTargetPressure
+0 FVAR ^fWatchdogTimeout
+0 IVAR ^iEMO
+0 IVAR ^iHeadDown
+0 IVAR ^iLightCurtainInterrupted
+0 IVAR ^iStartTest
+0 IVAR ^nAbovePressureCounts
+0 IVAR ^nAirPressCounts
+0 IVAR ^nHeadDownCounts
+1073741824 IVAR ^nLogIndex
+0 IVAR ^nPressureSampleCounts
+0 IVAR ^nSampleCount
+0 IVAR ^nStabAveragingIndex
+0 IVAR ^nStallCounts
+0 IVAR ^oAirToCylinders
+0 IVAR ^oAirToPump
+0 IVAR ^oBleed
+0 IVAR ^oFill
+0 IVAR ^oFillLast
+0 IVAR ^oLower
+0 IVAR ^oRaise
+0 IVAR ^oRaiseLast
+0 IVAR ^oWaterToPump
+0 UTVAR ^utAveragingTimer
+0 UTVAR ^utFillTimeout
+0 UTVAR ^utFlashTimer
+0 UTVAR ^utInc
+0 UTVAR ^utPressureSampleTimer
+0 UTVAR ^utRaiseTimeout
+0 UTVAR ^utVisionTimeout
+0 UTVAR ^utWatchdogTimer
+15 0 $VAR *sDate 
+100 0 $VAR *sLog 
+20 0 $VAR *sLotNo1 
+20 0 $VAR *sLotNo2 
+20 0 $VAR *sLotNo3 
+20 0 $VAR *sLotNo4 
+20 0 $VAR *sLotNo5 
+20 0 $VAR *sLotNo6 
+20 0 $VAR *sLotNo7 
+20 0 $VAR *sLotNo8 
+20 0 $VAR *sSerial1 
+20 0 $VAR *sSerial2 
+20 0 $VAR *sSerial3 
+20 0 $VAR *sSerial4 
+20 0 $VAR *sSerial5 
+20 0 $VAR *sSerial6 
+20 0 $VAR *sSerial7 
+20 0 $VAR *sSerial8 
+15 0 $VAR *sTime 
+200 0 FTABLE }ntfPressureSamples
+200 150 1073741824 $TABLE {Log 
+
+nullM64BOARD $FFFFFFFE $FFFFFFFE 16 32769 1.000000 0.010000 0.000000 2001 $7F000001 0 11 BOARD.MMP %GPPIO
+ 2 $80000001 APOINT    0.0000 $A5  0  0 %GPPIO 0 POINT.TNG ~EPReg
+ 130.0000    0.0000 ~EPReg SET.SCALE
+ 2 $40000001 APOINT -3625.0000 $C  0  1 %GPPIO 0 20.000000 1 POINT.TNGX ~Balluff_0_3625
+3625.0000 -3625.0000 ~Balluff_0_3625 SET.SCALE
+32 $80000001 SPOINT 0.0    OUTPUT  0  2 %GPPIO 0 POINT.TNG ~FailLED1
+32 $80000001 SPOINT 0.0    OUTPUT  1  2 %GPPIO 0 POINT.TNG ~FailLED2
+32 $80000001 SPOINT 0.0    OUTPUT  2  2 %GPPIO 0 POINT.TNG ~FailLED3
+32 $80000001 SPOINT 0.0    OUTPUT  3  2 %GPPIO 0 POINT.TNG ~FailLED4
+32 $80000001 SPOINT 0.0    OUTPUT  4  2 %GPPIO 0 POINT.TNG ~FailLED5
+32 $80000001 SPOINT 0.0    OUTPUT  5  2 %GPPIO 0 POINT.TNG ~FailLED6
+32 $80000001 SPOINT 0.0    OUTPUT  6  2 %GPPIO 0 POINT.TNG ~FailLED7
+32 $80000001 SPOINT 0.0    OUTPUT  7  2 %GPPIO 0 POINT.TNG ~FailLED8
+32 $80000001 SPOINT 0.0    OUTPUT  8  2 %GPPIO 0 POINT.TNG ~Bleed
+32 $80000001 SPOINT 0.0    OUTPUT  9  2 %GPPIO 0 POINT.TNG ~AirToCylinders
+32 $80000001 SPOINT 0.0    OUTPUT 10  2 %GPPIO 0 POINT.TNG ~AirToPump
+32 $80000001 SPOINT 0.0    OUTPUT 11  2 %GPPIO 0 POINT.TNG ~WaterToPump
+32 $80000001 SPOINT 0.0    OUTPUT 12  2 %GPPIO 0 POINT.TNG ~FillTank
+32 $80000001 SPOINT 0.0    OUTPUT 14  2 %GPPIO 0 POINT.TNG ~Up
+32 $80000001 SPOINT 0.0    OUTPUT 15  2 %GPPIO 0 POINT.TNG ~Down
+ 4 $40000001 SPOINT 0.0     INPUT  0  3 %GPPIO 0 POINT.TNG ~GantryDown
+ 4 $40000001 SPOINT 0.0     INPUT  1  3 %GPPIO 0 POINT.TNG ~StartButton
+ 4 $40000001 SPOINT 0.0     INPUT  2  3 %GPPIO 0 POINT.TNG ~EMO
+ 4 $40000001 SPOINT 0.0     INPUT  3  3 %GPPIO 0 POINT.TNG ~LightCurtain
+: 2_0
+
+1 LINE.NUM
+  ^fWatchdogTimeout @@ 
+  ^utVisionTimeout @!   
+
+2 LINE.NUM
+  ^fWatchdogTimeout @@ 
+  ^utWatchdogTimer @!   
+
+3 LINE.NUM
+  10    DELAY
+9 JUMP ;
+: 2_58
+1 LINE.NUM ^bTesting @@ ^bWatchdogExpired @@ LAND  IF 
+2 LINE.NUM " REC4 Watchdog timeout!" *sLog  $MOVE 
+3 LINE.NUM THEN 
+5 LINE.NUM 0 ^bStartTest @! 
+6 LINE.NUM 0 ^bTesting @! 
+7 LINE.NUM 0 I>F ^fRegVal @! 
+8 LINE.NUM 0 ^bPressurize @! 
+9 LINE.NUM 0 ^bAirFill @! 
+10 LINE.NUM 0 ^oRaise @! 
+11 LINE.NUM 0 ^oLower @! 
+12 LINE.NUM 0 ^oBleed @! 
+13 LINE.NUM 0 ^oWaterToPump @! 
+14 LINE.NUM 0 ^oFill @! 
+15 LINE.NUM 0 ^oAirToPump @! 
+16 LINE.NUM 0 ^oAirToCylinders @! 
+18 LINE.NUM 10  DELAY 
+12 JUMP ;
+: 2_64
+1 LINE.NUM 1 ^bWatchdogExpired @! 
+9 JUMP ;
+: 2_65
+1 LINE.NUM 0 ^bWatchdogExpired @! 
+8 JUMP ;
+: 2_67
+1 LINE.NUM 10  DELAY 
+9 JUMP ;
+: 2_74
+4 JUMP ;
+: 2_77
+1 LINE.NUM ^fWatchdogTimeout @@ ^utWatchdogTimer @! 
+2 LINE.NUM 0 ^bWatchdog @! 
+4 JUMP ;
+: 2_84
+1 LINE.NUM 1 ^bVisionSystemRunning @! 
+2 LINE.NUM 0 ^bVisionSystemAbort @! 
+4 LINE.NUM 10  DELAY 
+-3 JUMP ;
+: 2_85
+1 LINE.NUM 0 ^bVisionSystemRunning @! 
+3 LINE.NUM ^bTesting @@ ^bVisionSystemRunning @@ LAND  IF 
+4 LINE.NUM 1 ^bVisionSystemAbort @! 
+5 LINE.NUM " Vision System watchdog timeout!" *sLog  $MOVE 
+6 LINE.NUM THEN 
+8 LINE.NUM 0 ^bStartTest @! 
+9 LINE.NUM 0 ^bTesting @! 
+10 LINE.NUM 0 I>F ^fRegVal @! 
+11 LINE.NUM 0 ^bPressurize @! 
+13 LINE.NUM 10  DELAY 
+-4 JUMP ;
+: 2_87
+1 LINE.NUM ^fWatchdogTimeout @@ ^utVisionTimeout @! 
+2 LINE.NUM 0 ^bVisionRunning @! 
+3 JUMP ;
+: 2_16
+TRUE
+
+1 LINE.NUM
+  ^bWatchdog @@   0<>
+LAND
+IF -5 ELSE 0 THEN JUMP ;
+: 2_21
+TRUE
+
+1 LINE.NUM
+  ^utWatchdogTimer   T0=
+LAND
+IF -10 ELSE -9 THEN JUMP ;
+: 2_66
+TRUE
+
+1 LINE.NUM
+  ^iEMO @@   0<>
+LAND
+
+2 LINE.NUM
+  ^bWatchdogExpired @@   0=
+LAND
+IF -9 ELSE -12 THEN JUMP ;
+: 2_86
+TRUE
+
+1 LINE.NUM
+  ^utVisionTimeout   T0=
+LAND
+IF -6 ELSE -7 THEN JUMP ;
+: 2_88
+TRUE
+
+1 LINE.NUM
+  ^bVisionRunning @@   0<>
+LAND
+IF -6 ELSE -2 THEN JUMP ;
+T: T2
+DUMMY
+2_0
+2_58
+2_64
+2_65
+2_67
+2_74
+2_77
+2_84
+2_85
+2_87
+2_16
+2_21
+2_66
+2_86
+2_88
+T;
+&EMOWatchdog ' T2 SETTASK
+: 0_0
+
+1 LINE.NUM
+  ^fPressureSampleTime @@ 
+  ^utPressureSampleTimer @!   
+0 JUMP ;
+: 0_2
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM &EMOWatchdog  START.T DROP  
+5 LINE.NUM ^bStartTest @@ IF 
+6 LINE.NUM 1 ^bTesting @! 
+7 LINE.NUM THEN 
+9 LINE.NUM ^bStopTest @@ IF 
+10 LINE.NUM 0 ^bStartTest @! 
+11 LINE.NUM 0 ^bTesting @! 
+12 LINE.NUM 0 ^bStopTest @! 
+13 LINE.NUM 0 ^oRaise @! 
+14 LINE.NUM 0 ^oLower @! 
+15 LINE.NUM THEN 
+17 LINE.NUM ^bTesting @@ IF 
+18 LINE.NUM &RunTest  START.T DROP  
+19 LINE.NUM ELSE 
+20 LINE.NUM &RunTest  STOP.T 
+21 LINE.NUM THEN 
+3 JUMP ;
+: 0_4
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM ^iHeadDown @@ LNOT  IF 
+4 LINE.NUM ^bPressurize @@ IF 
+5 LINE.NUM 1 ^bStopTest @! 
+6 LINE.NUM 0 ^bStartTest @! 
+7 LINE.NUM 0 ^bPressurize @! 
+8 LINE.NUM " test stopped: lost head prox" *sLog  $MOVE 
+9 LINE.NUM 1 ^bHeadDownAbort @! 
+10 LINE.NUM THEN 
+11 LINE.NUM THEN 
+13 LINE.NUM ^iLightCurtainInterrupted @@ IF 
+14 LINE.NUM ^bTesting @@ IF 
+15 LINE.NUM 1 ^bStopTest @! 
+16 LINE.NUM 0 ^bStartTest @! 
+17 LINE.NUM " test stopped: light curtain" *sLog  $MOVE 
+18 LINE.NUM THEN 
+19 LINE.NUM 1 ^bStopTest @! 
+20 LINE.NUM 0 ^oAirToCylinders @! 
+21 LINE.NUM 0 ^oAirToPump @! 
+22 LINE.NUM 0 ^oBleed @! 
+23 LINE.NUM 0 ^oFill @! 
+24 LINE.NUM 0 ^oLower @! 
+25 LINE.NUM 0 ^oRaise @! 
+26 LINE.NUM 0 ^oWaterToPump @! 
+27 LINE.NUM 0 I>F ^fRegVal @! 
+28 LINE.NUM THEN 
+4 JUMP ;
+: 0_5
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM ^fRegVal @@ ~EPReg @! 
+5 LINE.NUM ^oBleed @@ ~Bleed @! 
+6 LINE.NUM ^oAirToCylinders @@ ~AirToCylinders @! 
+7 LINE.NUM ^oAirToPump @@ ~AirToPump @! 
+8 LINE.NUM ^oWaterToPump @@ ~WaterToPump @! 
+9 LINE.NUM ^oFill @@ ~FillTank @! 
+10 LINE.NUM ^oRaise @@ ~Up @! 
+11 LINE.NUM ^oLower @@ ~Down @! 
+13 LINE.NUM ~GantryDown @@I ^iHeadDown @! 
+14 LINE.NUM ~EMO @@I LNOT  ^iEMO @! 
+15 LINE.NUM ~LightCurtain @@I 0 = ^iEMO @@ 1 = LAND  ^iLightCurtainInterrupted @! 
+16 LINE.NUM ~StartButton @@I ^iStartTest @! 
+4 JUMP ;
+: 0_9
+-4 JUMP ;
+: 0_11
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM ^bTesting @@ LNOT  IF 
+4 LINE.NUM 0 ^bPressurize @! 
+5 LINE.NUM 0 ^bAirFill @! 
+6 LINE.NUM 0 I>F ^fRegVal @! 
+7 LINE.NUM 0 ^oBleed @! 
+8 LINE.NUM 0 ^oAirToCylinders @! 
+9 LINE.NUM 0 ^oAirToPump @! 
+10 LINE.NUM 0 ^oWaterToPump @! 
+11 LINE.NUM 0 ^bTareVisionSystem @! 
+12 LINE.NUM ELSE 
+13 LINE.NUM 1 ^oLower @! 
+14 LINE.NUM 0 ^oRaise @! 
+15 LINE.NUM 0 ^oFill @! 
+16 LINE.NUM THEN 
+18 LINE.NUM ^oRaise @@ ^oRaiseLast @@ LNOT  LAND  IF 
+19 LINE.NUM 600 I>F ^utRaiseTimeout @! 
+20 LINE.NUM THEN 
+22 LINE.NUM ^oRaise @@ LNOT  IF 
+23 LINE.NUM 600 I>F ^utRaiseTimeout @! 
+24 LINE.NUM THEN 
+26 LINE.NUM ^utRaiseTimeout  T0= IF 
+27 LINE.NUM 0 ^oRaise @! 
+28 LINE.NUM THEN 
+30 LINE.NUM ^oRaise @@ ^oRaiseLast @! 
+32 LINE.NUM ^oFill @@ ^oFillLast @@ LNOT  LAND  IF 
+33 LINE.NUM 600 I>F ^utFillTimeout @! 
+34 LINE.NUM THEN 
+36 LINE.NUM ^oFill @@ LNOT  IF 
+37 LINE.NUM 600 I>F ^utFillTimeout @! 
+38 LINE.NUM THEN 
+40 LINE.NUM ^utFillTimeout  T0= IF 
+41 LINE.NUM 0 ^oFill @! 
+42 LINE.NUM THEN 
+44 LINE.NUM ^oFill @@ ^oFillLast @! 
+-4 JUMP ;
+: 0_15
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM *sLog " " $= LNOT  IF 
+4 LINE.NUM *sDate  0 DATE>$ 
+5 LINE.NUM *sTime  TIME>$ 
+6 LINE.NUM *_HSV_SEMA Acquire1String *sDate  *_HSV_TEMP $MOVE "  "  *_HSV_TEMP $CAT *sTime  *_HSV_TEMP $CAT " : "  *_HSV_TEMP $CAT *sLog  *_HSV_TEMP $CAT *_HSV_TEMP ^nLogIndex @@ {Log $TABLE@ $MOVE Release1String 
+7 LINE.NUM  4  -22000 0 ^nLogIndex @@ {Log $TABLE@  AddToMessageQueue 
+8 LINE.NUM ^nLogIndex @@ 1 +  ^nLogIndex @! 
+9 LINE.NUM ^nLogIndex @@ {Log  TableSize@ >= IF 
+10 LINE.NUM 0 ^nLogIndex @! 
+11 LINE.NUM THEN 
+12 LINE.NUM " " *sLog  $MOVE 
+13 LINE.NUM THEN 
+-3 JUMP ;
+: 0_18
+2 LINE.NUM ^nPressureSampleCounts @@ 1 +  ^nPressureSampleCounts @! 
+3 LINE.NUM ^fPressureTotals @@ ~Balluff_0_3625 @@ F+ ^fPressureOffset @@ F+ ^fPressureTotals @! 
+5 LINE.NUM ^utPressureSampleTimer  T0= IF 
+6 LINE.NUM ^fPressureTotals @@ ^nPressureSampleCounts @@F F/  Truncate 6 I>F F<= IF 
+7 LINE.NUM 0 I>F ^fPressure @! 
+8 LINE.NUM ELSE 
+9 LINE.NUM ^fPressureTotals @@ ^nPressureSampleCounts @@F F/  Truncate ^fPressure @! 
+10 LINE.NUM THEN 
+11 LINE.NUM 0 I>F ^fPressureTotals @! 
+12 LINE.NUM 0 ^nPressureSampleCounts @! 
+13 LINE.NUM ^fPressureSampleTime @@ ^utPressureSampleTimer @! 
+14 LINE.NUM THEN 
+16 LINE.NUM ^fTargetPressure @@ 0 I>F F> IF 
+17 LINE.NUM ^fPressure @@ ^fTargetPressure @@ F/ 1.00000000e+002 F* ^fPercTargetPressure @! 
+18 LINE.NUM ELSE 
+18 LINE.NUM ^fAirTarget @@ 0 I>F F> IF 
+19 LINE.NUM ^fPressure @@ ^fAirTarget @@ F/ 1.00000000e+002 F* ^fPercTargetPressure @! 
+20 LINE.NUM ELSE 
+21 LINE.NUM 0 I>F ^fPercTargetPressure @! 
+22 LINE.NUM THEN THEN 
+25 LINE.NUM ^nStabAveragingIndex @@ 1 +  ^nStabAveragingIndex @! 
+26 LINE.NUM ^fStabAveragingTotal @@ ^fPressure @@ F+ ^fStabAveragingTotal @! 
+28 LINE.NUM ^nStabAveragingIndex @@ ^nSampleCount @@ >= IF 
+29 LINE.NUM 0 ^nStabAveragingIndex @! 
+30 LINE.NUM ^fStabilizedPressure @@ ^fStabilizedPressureLast @! 
+31 LINE.NUM ^fStabAveragingTotal @@ ^nSampleCount @@F F/ ^fStabilizedPressure @! 
+32 LINE.NUM ^fStabilizedPressure @@ ^fStabilizedPressureLast @@ F- ^fStabPressureDiff @! 
+33 LINE.NUM 0 I>F ^fStabAveragingTotal @! 
+34 LINE.NUM ^utAveragingTimer @@F ^Af_AveragingTime @! 
+35 LINE.NUM 10 I>F ^utAveragingTimer @! 
+36 LINE.NUM THEN 
+-5 JUMP ;
+: 0_21
+2 LINE.NUM ^utFlashTimer @@F 0 I>F F= ^utFlashTimer  T0= LOR  IF 
+3 LINE.NUM 5.00000000e-001 ^utFlashTimer @! 
+4 LINE.NUM ^bFlash @@ LNOT  ^bFlash @! 
+5 LINE.NUM THEN 
+7 LINE.NUM ^bFlash @@ IF 
+8 LINE.NUM ^bFail1 @@ ~FailLED1 @! 
+9 LINE.NUM ^bFail2 @@ ~FailLED2 @! 
+10 LINE.NUM ^bFail3 @@ ~FailLED3 @! 
+11 LINE.NUM ^bFail4 @@ ~FailLED4 @! 
+12 LINE.NUM ^bFail5 @@ ~FailLED5 @! 
+13 LINE.NUM ^bFail6 @@ ~FailLED6 @! 
+14 LINE.NUM ^bFail7 @@ ~FailLED7 @! 
+15 LINE.NUM ^bFail8 @@ ~FailLED8 @! 
+16 LINE.NUM ELSE 
+17 LINE.NUM 0 ~FailLED1 @! 
+18 LINE.NUM 0 ~FailLED2 @! 
+19 LINE.NUM 0 ~FailLED3 @! 
+20 LINE.NUM 0 ~FailLED4 @! 
+21 LINE.NUM 0 ~FailLED5 @! 
+22 LINE.NUM 0 ~FailLED6 @! 
+23 LINE.NUM 0 ~FailLED7 @! 
+24 LINE.NUM 0 ~FailLED8 @! 
+25 LINE.NUM THEN 
+27 LINE.NUM 2  DELAY 
+-3 JUMP ;
+T: T0
+DUMMY
+0_0
+0_2
+0_4
+0_5
+0_9
+0_11
+0_15
+0_18
+0_21
+T;
+&Powerup ' T0 SETTASK
+: 1_0
+
+1 LINE.NUM
+  0  
+  ^nHeadDownCounts @!   
+
+2 LINE.NUM
+  ^bHeadDownAbort   FALSE@!
+0 JUMP ;
+: 1_1
+1 LINE.NUM 0 ^oRaise @! 
+2 LINE.NUM 1 ^oLower @! 
+3 LINE.NUM 1 ^oBleed @! 
+5 LINE.NUM 0 ^nAirPressCounts @! 
+6 LINE.NUM 0 ^nAbovePressureCounts @! 
+7 LINE.NUM 0 ^bBumpPressure @! 
+9 LINE.NUM 200  DELAY 
+10 LINE.NUM ^iHeadDown @@ IF 
+11 LINE.NUM ^nHeadDownCounts @@ 1 +  ^nHeadDownCounts @! 
+12 LINE.NUM ELSE 
+13 LINE.NUM 0 ^nHeadDownCounts @! 
+14 LINE.NUM THEN 
+16 LINE.NUM 0 ^bFail1 @! 
+17 LINE.NUM 0 ^bFail2 @! 
+18 LINE.NUM 0 ^bFail3 @! 
+19 LINE.NUM 0 ^bFail4 @! 
+20 LINE.NUM 0 ^bFail5 @! 
+21 LINE.NUM 0 ^bFail6 @! 
+22 LINE.NUM 0 ^bFail7 @! 
+23 LINE.NUM 0 ^bFail8 @! 
+11 JUMP ;
+: 1_2
+1 LINE.NUM 1 ^bAirFill @! 
+2 LINE.NUM 1 ^oBleed @! 
+3 LINE.NUM 0 ^oAirToPump @! 
+4 LINE.NUM 0 ^oWaterToPump @! 
+5 LINE.NUM 1 ^oAirToCylinders @! 
+6 LINE.NUM ^fAirTarget @@ 8 I>F F+ ^fRegVal @! 
+8 LINE.NUM ^fPressure @@ ^fAirTarget @@ F> IF 
+9 LINE.NUM ^nAirPressCounts @@ 1 +  ^nAirPressCounts @! 
+10 LINE.NUM ELSE 
+11 LINE.NUM 0 ^nAirPressCounts @! 
+12 LINE.NUM THEN 
+14 LINE.NUM 100  DELAY 
+9 JUMP ;
+: 1_13
+1 LINE.NUM 0 ^bAirFill @! 
+2 LINE.NUM 1 ^bPressurize @! 
+3 LINE.NUM 0 ^bBumpPressure @! 
+5 LINE.NUM 0 I>F ^fRegVal @! 
+6 LINE.NUM 0 ^oAirToCylinders @! 
+8 LINE.NUM 500  DELAY 
+10 LINE.NUM 1 ^oWaterToPump @! 
+11 LINE.NUM 1 ^oAirToPump @! 
+13 LINE.NUM 1.00000001e-001 ^utInc @! 
+14 LINE.NUM 0 I>F ^fBoost @! 
+15 LINE.NUM 0 ^nStallCounts @! 
+17 LINE.NUM ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ F/ ^fRegVal @! 
+10 JUMP ;
+: 1_14
+1 LINE.NUM 1 ^oAirToPump @! 
+3 LINE.NUM ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ ^fBoost @@ F- F/ ^fBoost @@ F+ ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ ^fBoost @@ F- F/ 1.29999995e+000 F*  FMIN ^fRegVal @! 
+5 LINE.NUM ^utInc  T0= IF 
+6 LINE.NUM ^utInc  GET.RESTART.TMR DROP  
+8 LINE.NUM ^fPercTargetPressure @@ 80 I>F F> IF 
+9 LINE.NUM ^fStabPressureDiff @@ 30 I>F F< IF 
+10 LINE.NUM ^nStallCounts @@ 1 +  ^nStallCounts @! 
+11 LINE.NUM ^nStallCounts @@ 25 > IF 
+12 LINE.NUM 0 ^nStallCounts @! 
+13 LINE.NUM ^fBoost @@ 1 I>F F+ 5 I>F  FMIN ^fBoost @! 
+14 LINE.NUM THEN 
+15 LINE.NUM ELSE 
+16 LINE.NUM 0 ^nStallCounts @! 
+17 LINE.NUM THEN 
+18 LINE.NUM THEN 
+20 LINE.NUM ^fPercTargetPressure @@ ^fStopPercent @@ F> IF 
+21 LINE.NUM ^nAbovePressureCounts @@ 1 +  ^nAbovePressureCounts @! 
+22 LINE.NUM ELSE 
+23 LINE.NUM 0 ^nAbovePressureCounts @! 
+24 LINE.NUM THEN 
+25 LINE.NUM THEN 
+27 LINE.NUM 10  DELAY 
+12 JUMP ;
+: 1_23
+2 LINE.NUM 0 ^nAbovePressureCounts @! 
+3 LINE.NUM 0 ^bBumpPressure @! 
+5 LINE.NUM 10  DELAY 
+12 JUMP ;
+: 1_26
+1 LINE.NUM 0 ^oBleed @! 
+2 LINE.NUM 0 I>F ^fRegVal @! 
+3 LINE.NUM 0 ^oAirToPump @! 
+4 LINE.NUM 0 ^oWaterToPump @! 
+5 LINE.NUM 0 ^oAirToCylinders @! 
+6 LINE.NUM 0 ^bBumpPressure @! 
+8 LINE.NUM 10  DELAY 
+9 JUMP ;
+: 1_31
+1 LINE.NUM 0 ^oLower @! 
+2 LINE.NUM 1 ^oRaise @! 
+3 LINE.NUM 0 ^bStartTest @! 
+4 LINE.NUM 0 ^bTesting @! 
+5 LINE.NUM 0 ^bStopTest @! 
+7 LINE.NUM 10000  DELAY 
+13 JUMP ;
+: 1_46
+1 LINE.NUM 1 ^bBumpPressure @! 
+5 JUMP ;
+: 1_49
+1 LINE.NUM 1 ^bTareVisionSystem @! 
+3 LINE.NUM 1000  DELAY 
+5 LINE.NUM 0 ^bTareVisionSystem @! 
+-8 JUMP ;
+: 1_57
+1 LINE.NUM 20  DELAY 
+9 JUMP ;
+: 1_61
+1 LINE.NUM 1 ^bPressurize @! 
+8 JUMP ;
+: 1_6
+TRUE
+
+1 LINE.NUM
+  ^fPressure @@ 
+  ^fAirTarget @@   F>=
+LAND
+
+2 LINE.NUM
+  ^nAirPressCounts @@ 
+  10    >=
+LAND
+IF 6 ELSE -11 THEN JUMP ;
+: 1_7
+TRUE
+
+1 LINE.NUM
+  ^nHeadDownCounts @@ 
+  10    >=
+LAND
+IF -5 ELSE -13 THEN JUMP ;
+: 1_17
+TRUE
+
+1 LINE.NUM
+  ^bPressurize @@   0<>
+LAND
+IF -11 ELSE -9 THEN JUMP ;
+: 1_18
+TRUE
+
+1 LINE.NUM
+  ^fPercTargetPressure @@ 
+  ^fBumpPercent @@   F>
+LAND
+IF -11 ELSE -8 THEN JUMP ;
+: 1_27
+TRUE
+
+1 LINE.NUM
+  ^fPressure @@ 
+  ^fBleedPressure @@   F>
+LAND
+IF -11 ELSE -10 THEN JUMP ;
+: 1_34
+TRUE
+
+1 LINE.NUM
+  ^fPercTargetPressure @@ 
+  ^fStopPercent @@   F>=
+LAND
+
+2 LINE.NUM
+  ^nAbovePressureCounts @@ 
+  10    >=
+LAND
+IF -3 ELSE -4 THEN JUMP ;
+: 1_41
+TRUE
+
+1 LINE.NUM
+  ^bPressurize @@   0<>
+LAND
+IF -4 ELSE -13 THEN JUMP ;
+: 1_52
+TRUE
+
+1 LINE.NUM
+  ^fTargetPressure @@ 
+  0.0    F=
+LAND
+IF -9 ELSE -17 THEN JUMP ;
+: 1_55
+TRUE
+
+1 LINE.NUM
+  ^bPressurize @@   0<>
+LAND
+IF -11 ELSE -15 THEN JUMP ;
+T: T1
+DUMMY
+1_0
+1_1
+1_2
+1_13
+1_14
+1_23
+1_26
+1_31
+1_46
+1_49
+1_57
+1_61
+1_6
+1_7
+1_17
+1_18
+1_27
+1_34
+1_41
+1_52
+1_55
+T;
+&RunTest ' T1 SETTASK
+CREATE T.ARRAY
+&EMOWatchdog ,
+&Powerup ,
+&RunTest ,
+ 0 ,
+CREATE V.ARRAY
+^Af_AveragingTime ,
+^bAirFill ,
+^bBumpPressure ,
+^bFail1 ,
+^bFail2 ,
+^bFail3 ,
+^bFail4 ,
+^bFail5 ,
+^bFail6 ,
+^bFail7 ,
+^bFail8 ,
+^bFlash ,
+^bHeadDownAbort ,
+^bPass1 ,
+^bPass2 ,
+^bPass3 ,
+^bPass4 ,
+^bPass5 ,
+^bPass6 ,
+^bPass7 ,
+^bPass8 ,
+^bPressurize ,
+^bStartTest ,
+^bStopTest ,
+^bTareVisionSystem ,
+^bTesting ,
+^bVisionRunning ,
+^bVisionSystemAbort ,
+^bVisionSystemRunning ,
+^bWatchdog ,
+^bWatchdogExpired ,
+^fAirTarget ,
+^fBleedPressure ,
+^fBoost ,
+^fBumpPercent ,
+^fPercTargetPressure ,
+^fPistonRatio ,
+^fPressure ,
+^fPressureOffset ,
+^fPressureSampleTime ,
+^fPressureTotals ,
+^fRegVal ,
+^fStabAveragingTotal ,
+^fStabilizedPressure ,
+^fStabilizedPressureLast ,
+^fStabPressureDiff ,
+^fStopPercent ,
+^fTargetPressure ,
+^fWatchdogTimeout ,
+^iEMO ,
+^iHeadDown ,
+^iLightCurtainInterrupted ,
+^iStartTest ,
+^nAbovePressureCounts ,
+^nAirPressCounts ,
+^nHeadDownCounts ,
+^nLogIndex ,
+^nPressureSampleCounts ,
+^nSampleCount ,
+^nStabAveragingIndex ,
+^nStallCounts ,
+^oAirToCylinders ,
+^oAirToPump ,
+^oBleed ,
+^oFill ,
+^oFillLast ,
+^oLower ,
+^oRaise ,
+^oRaiseLast ,
+^oWaterToPump ,
+*sDate ,
+*sLog ,
+*sLotNo1 ,
+*sLotNo2 ,
+*sLotNo3 ,
+*sLotNo4 ,
+*sLotNo5 ,
+*sLotNo6 ,
+*sLotNo7 ,
+*sLotNo8 ,
+*sSerial1 ,
+*sSerial2 ,
+*sSerial3 ,
+*sSerial4 ,
+*sSerial5 ,
+*sSerial6 ,
+*sSerial7 ,
+*sSerial8 ,
+*sTime ,
+*_HSV_SEMA ,
+*_HSV_TEMP ,
+ 0 ,
+CREATE TI.ARRAY
+^utAveragingTimer ,
+^utFillTimeout ,
+^utFlashTimer ,
+^utInc ,
+^utPressureSampleTimer ,
+^utRaiseTimeout ,
+^utVisionTimeout ,
+^utWatchdogTimer ,
+ 0 ,
+CREATE PTR.ARRAY
+ 0 ,
+CREATE TA.ARRAY 
+}ntfPressureSamples ,
+{Log ,
+ 0 ,
+CREATE PTRTABLE.ARRAY 
+ 0 ,
+CREATE B.ARRAY
+%GPPIO ,
+ 0 ,
+CREATE P.ARRAY
+~AirToCylinders ,
+~AirToPump ,
+~Bleed ,
+~Down ,
+~EMO ,
+~FailLED1 ,
+~FailLED2 ,
+~FailLED3 ,
+~FailLED4 ,
+~FailLED5 ,
+~FailLED6 ,
+~FailLED7 ,
+~FailLED8 ,
+~FillTank ,
+~GantryDown ,
+~LightCurtain ,
+~StartButton ,
+~Up ,
+~WaterToPump ,
+~Balluff_0_3625 ,
+~EPReg ,
+ 0 ,
+CREATE PID.ARRAY
+ 0 ,
+CREATE E/R.ARRAY
+ 0 ,
+CREATE E/RGROUP.ARRAY
+ 0 ,
+: CONFIG_PORTS
+;
+: W_INIT_IO
+CONFIG_PORTS
+" %GPPIO  (1/1)" *_HSV_INIT_IO $MOVE 0 ^_HNV_INIT_IO @!
+%GPPIO ENABLE
+ " Initializing variables" *_HSV_INIT_IO $MOVE
+0.00000000 ^Af_AveragingTime @!
+0 ^bAirFill @!
+0 ^bBumpPressure @!
+0 ^bFail1 @!
+0 ^bFail2 @!
+0 ^bFail3 @!
+0 ^bFail4 @!
+0 ^bFail5 @!
+0 ^bFail6 @!
+0 ^bFail7 @!
+0 ^bFail8 @!
+0 ^bFlash @!
+0 ^bHeadDownAbort @!
+0 ^bPass1 @!
+0 ^bPass2 @!
+0 ^bPass3 @!
+0 ^bPass4 @!
+0 ^bPass5 @!
+0 ^bPass6 @!
+0 ^bPass7 @!
+0 ^bPass8 @!
+0 ^bPressurize @!
+0 ^bStartTest @!
+0 ^bStopTest @!
+0 ^bTareVisionSystem @!
+0 ^bTesting @!
+0 ^bVisionRunning @!
+0 ^bVisionSystemAbort @!
+0 ^bVisionSystemRunning @!
+0 ^bWatchdog @!
+0 ^bWatchdogExpired @!
+85.000000 ^fAirTarget @!
+10.000000 ^fBleedPressure @!
+0.00000000 ^fBoost @!
+100.50000 ^fBumpPercent @!
+0.00000000 ^fPercTargetPressure @!
+35.000000 ^fPistonRatio @!
+0.00000000 ^fPressure @!
+0.00000000 ^fPressureOffset @!
+0.10000000 ^fPressureSampleTime @!
+0.00000000 ^fPressureTotals @!
+0.00000000 ^fRegVal @!
+0.00000000 ^fStabAveragingTotal @!
+0.00000000 ^fStabilizedPressure @!
+0.00000000 ^fStabilizedPressureLast @!
+0.00000000 ^fStabPressureDiff @!
+102.00000 ^fStopPercent @!
+2500.0000 ^fTargetPressure @!
+10.000000 ^fWatchdogTimeout @!
+0 ^iEMO @!
+0 ^iHeadDown @!
+0 ^iLightCurtainInterrupted @!
+0 ^iStartTest @!
+0 ^nAbovePressureCounts @!
+0 ^nAirPressCounts @!
+0 ^nHeadDownCounts @!
+0 ^nPressureSampleCounts @!
+70 ^nSampleCount @!
+0 ^nStabAveragingIndex @!
+0 ^nStallCounts @!
+0 ^oAirToCylinders @!
+0 ^oAirToPump @!
+0 ^oBleed @!
+0 ^oFill @!
+0 ^oFillLast @!
+0 ^oLower @!
+0 ^oRaise @!
+0 ^oRaiseLast @!
+0 ^oWaterToPump @!
+0.0 ^utAveragingTimer SetTimer
+0.0 ^utFillTimeout SetTimer
+0.0 ^utFlashTimer SetTimer
+0.0 ^utInc SetTimer
+0.0 ^utPressureSampleTimer SetTimer
+0.0 ^utRaiseTimeout SetTimer
+0.0 ^utVisionTimeout SetTimer
+0.0 ^utWatchdogTimer SetTimer
+0.00000000 0 -1 }ntfPressureSamples InitTable
+" "
+ *sDate $MOVE
+" "
+ *sLog $MOVE
+" "
+ *sLotNo1 $MOVE
+" "
+ *sLotNo2 $MOVE
+" "
+ *sLotNo3 $MOVE
+" "
+ *sLotNo4 $MOVE
+" "
+ *sLotNo5 $MOVE
+" "
+ *sLotNo6 $MOVE
+" "
+ *sLotNo7 $MOVE
+" "
+ *sLotNo8 $MOVE
+" "
+ *sSerial1 $MOVE
+" "
+ *sSerial2 $MOVE
+" "
+ *sSerial3 $MOVE
+" "
+ *sSerial4 $MOVE
+" "
+ *sSerial5 $MOVE
+" "
+ *sSerial6 $MOVE
+" "
+ *sSerial7 $MOVE
+" "
+ *sSerial8 $MOVE
+" "
+ *sTime $MOVE
+ " " *_HSV_INIT_IO $MOVE
+;
+T: T_INIT_IO
+W_INIT_IO
+&Powerup START.T DROP
+T;
+&_INIT_IO ' T_INIT_IO  SETTASK
+   : _RUN
+   CLEARERRORS
+   &_INIT_IO START.T DROP
+   ;
+: DATESTAMP ." 03/12/20 " ;
+: TIMESTAMP ." 14:26:01 " ;
+: CRCSTAMP  ." 00191E66513154FF949C6D424305FFE4 " ;
+MAKECHECK
+CLEAR.BREAKS
+
+\ ********************** INC File **********************
+
+0 ^nLogIndex @!
+\ ""DOWNLOAD_COMPRESSION_OFF
+: _TABLEINIT
+" "
+ 0 -1 {Log Init$Table ;
+_TABLEINIT
+FORGET _TABLEINIT

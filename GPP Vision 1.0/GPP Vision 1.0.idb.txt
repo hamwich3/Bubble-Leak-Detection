@@ -1,0 +1,228 @@
+# REV = 1
+
+# PAC CONTROL TAG DATABASE DUMP
+# ----------------------------------------------------------------
+# NAME :         C:\Users\J20V4J2\Documents\Visual Studio 2017\Projects\Bubble Leak Detection v0.1\GPP Vision 1.0\GPP Vision 1.0.idb
+# VERSION :      R10.2a
+# TIME/DATE :    14:26:1 3/12/2020
+# 
+# INSTRUCTIONS : This file gets written with the corresponding IDB file.
+#                It is not read by PAC Control. It may be used by other programs to 
+#                get basic information about the tag database.
+#                
+#                Each tag (e.g. variables, I/O units and points, charts, etc.) is 
+#                listed here. 
+#                
+#                More columns or tag types (e.g. TAG2) may be added in the future.
+#                
+#                
+# BITMASK INFO:  Here is the list of bitmasks used by PAC Control.
+#                More than one bit may be set for a given tag. Currently, the only types
+#                that can have more than one bit set at a time are digital points with 
+#                features (e.g. digital input with counter) or a pointer.
+#                
+#                BITMASK 0
+#                -------------------------------------------
+#                DIN_SMART                        0x40000000
+#                DIN_COUNTER                      0x00000001
+#                DIN_COUNTER_QUADRATURE           0x00000002
+#                DOUT_SMART                       0x10000000
+#                DOUT_TPO                         0x00010000
+#                DIN_ON_PULSE_MEAS                0x00000010
+#                DIN_OFF_PULSE_MEAS               0x00000020
+#                DIN_FREQUENCY                    0x00000040
+#                DIN_PERIOD                       0x00000080
+#                DIN_ON_TIME_TOTALIZER            0x00000100
+#                DIN_OFF_TIME_TOTALIZER           0x00000200
+#                
+#                BITMASK 1
+#                -------------------------------------------
+#                AIN                              0x00000001
+#                AOUT                             0x00000002
+#                PID_LOOP    (mistic)             0x00000200
+#                PID_LOOP_2  (OptoMMP)            0x00000004
+#                DIGITAL_EVENT_REACTION           0x00000008
+#                ANALOG_EVENT_REACTION            0x00000010
+#                EVENT_REACTION_GROUP             0x00000080
+#                CHART                            0x00000100
+#                SERIAL_CHANNEL                   0x00000400
+#                
+#                BITMASK 2
+#                -------------------------------------------
+#                G4EB2                            0x00000001
+#                G4D16R                           0x00000002
+#                G4D32RS                          0x00000004
+#                G4A8R, G4RAX                     0x00000008
+#                B200                             0x00001000
+#                B3000 (digital)                  0x00002000
+#                B3000 (analog)                   0x00004000
+#                B100                             0X00010000
+#                SNAP-BRS                         0X00020000
+#                SNAP-ENET-D64                    0x00040000
+#                SNAP-B3000-ENET, SNAP-ENET-RTC   0x00080000
+#                SNAP-UP1-D64                     0x00100000
+#                SNAP-UP1-ADS                     0x00200000
+#                SNAP-UP1-M64                     0x00400000
+#                SNAP-ENET-S64                    0x00800000
+#                SNAP-PAC-R1                      0x10000000
+#                SNAP-PAC-R2                      0x20000000
+#                Generic memory map device        0x40000000
+#                SNAP-PAC-R1-B                    0x80000000
+#                SNAP-PAC-EB1                     0x00000010
+#                SNAP-PAC-EB2                     0x00000020
+#                SNAP-PAC-SB1                     0x00000100
+#                SNAP-PAC-SB2                     0x00000200
+#                E1                               0x01000000
+#                E2                               0x02000000
+#                GRV-EPIC-PR1                     0x04000000
+# 
+#                BITMASK 3
+#                -------------------------------------------
+#                VARIABLE_INTEGER                 0x00000008
+#                VARIABLE_FLOAT                   0x00000010
+#                VARIABLE_TIMER                   0x00000020
+#                VARIABLE_STRING                  0x00000040
+#                VARIABLE_POINTER                 0x80000000
+#                TABLE_INTEGER                    0x00000100
+#                TABLE_FLOAT                      0x00000200
+#                TABLE_STRING                     0x00000800
+#                TABLE_POINTER                    0x00001000
+#                VARIABLE_UP_TIMER                0X00002000
+#                VARIABLE_INTEGER_64              0X00004000
+#                TABLE_INTEGER_64                 0X00010000
+#                TABLE_NULL                       0X00020000
+#                VARIABLE_STREAM                  0x00040000
+
+
+
+
+#  (Please note that the TAG1 definition may have columns added in the future.
+#   Any new columns will be added to the right of the existing ones.)
+#   This file should be parsed accordingly.)
+
+# TAG1,NAME,ID,BITMASK_0,BITMASK_1,BITMASK_2,BITMASK_3,TABLE_LENGTH,STRING_WIDTH
+
+TAG1,EMOWatchdog                                       ,2    ,00000000,00000100,00000000,00000000,0    ,0   
+TAG1,Powerup                                           ,0    ,00000000,00000100,00000000,00000000,0    ,0   
+TAG1,RunTest                                           ,1    ,00000000,00000100,00000000,00000000,0    ,0   
+TAG1,GPPIO                                             ,0    ,00000000,00000000,20000000,00000000,0    ,0   
+TAG1,AirToCylinders                                    ,3    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,AirToPump                                         ,4    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,Bleed                                             ,2    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,Down                                              ,8    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,EMO                                               ,1    ,40000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED1                                          ,9    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED2                                          ,10   ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED3                                          ,11   ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED4                                          ,12   ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED5                                          ,13   ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED6                                          ,14   ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED7                                          ,15   ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FailLED8                                          ,16   ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,FillTank                                          ,6    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,GantryDown                                        ,0    ,40000000,00000000,00000000,00000000,0    ,0   
+TAG1,LightCurtain                                      ,18   ,40000000,00000000,00000000,00000000,0    ,0   
+TAG1,StartButton                                       ,17   ,40000000,00000000,00000000,00000000,0    ,0   
+TAG1,Up                                                ,7    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,WaterToPump                                       ,5    ,10000000,00000000,00000000,00000000,0    ,0   
+TAG1,Balluff_0_3625                                    ,1    ,00000000,00000001,00000000,00000000,0    ,0   
+TAG1,EPReg                                             ,0    ,00000000,00000002,00000000,00000000,0    ,0   
+TAG1,Af_AveragingTime                                  ,41   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,bAirFill                                          ,0    ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bBumpPressure                                     ,67   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail1                                            ,46   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail2                                            ,47   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail3                                            ,48   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail4                                            ,49   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail5                                            ,58   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail6                                            ,59   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail7                                            ,60   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFail8                                            ,61   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bFlash                                            ,78   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bHeadDownAbort                                    ,44   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass1                                            ,50   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass2                                            ,51   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass3                                            ,52   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass4                                            ,53   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass5                                            ,54   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass6                                            ,55   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass7                                            ,56   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPass8                                            ,57   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bPressurize                                       ,1    ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bStartTest                                        ,22   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bStopTest                                         ,29   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bTareVisionSystem                                 ,71   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bTesting                                          ,28   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bVisionRunning                                    ,68   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bVisionSystemAbort                                ,70   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bVisionSystemRunning                              ,45   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bWatchdog                                         ,5    ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bWatchdogExpired                                  ,6    ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,fAirTarget                                        ,4    ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fBleedPressure                                    ,66   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fBoost                                            ,26   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fBumpPercent                                      ,35   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fPercTargetPressure                               ,34   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fPistonRatio                                      ,23   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fPressure                                         ,2    ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fPressureOffset                                   ,80   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fPressureSampleTime                               ,63   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fPressureTotals                                   ,64   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fRegVal                                           ,11   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fStabAveragingTotal                               ,38   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fStabilizedPressure                               ,37   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fStabilizedPressureLast                           ,25   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fStabPressureDiff                                 ,43   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fStopPercent                                      ,36   ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fTargetPressure                                   ,3    ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,fWatchdogTimeout                                  ,7    ,00000000,00000000,00000000,00000010,0    ,0   
+TAG1,iEMO                                              ,8    ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,iHeadDown                                         ,19   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,iLightCurtainInterrupted                          ,79   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,iStartTest                                        ,76   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nAbovePressureCounts                              ,32   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nAirPressCounts                                   ,31   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nHeadDownCounts                                   ,21   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nLogIndex                                         ,20   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nPressureSampleCounts                             ,65   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nSampleCount                                      ,42   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nStabAveragingIndex                               ,39   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,nStallCounts                                      ,27   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oAirToCylinders                                   ,13   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oAirToPump                                        ,14   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oBleed                                            ,12   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oFill                                             ,16   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oFillLast                                         ,74   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oLower                                            ,17   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oRaise                                            ,18   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oRaiseLast                                        ,73   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,oWaterToPump                                      ,15   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,utAveragingTimer                                  ,40   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utFillTimeout                                     ,75   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utFlashTimer                                      ,77   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utInc                                             ,24   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utPressureSampleTimer                             ,62   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utRaiseTimeout                                    ,72   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utVisionTimeout                                   ,69   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utWatchdogTimer                                   ,9    ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,sDate                                             ,9    ,00000000,00000000,00000000,00000040,0    ,15  
+TAG1,sLog                                              ,10   ,00000000,00000000,00000000,00000040,0    ,100 
+TAG1,sLotNo1                                           ,12   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sLotNo2                                           ,13   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sLotNo3                                           ,14   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sLotNo4                                           ,15   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sLotNo5                                           ,16   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sLotNo6                                           ,17   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sLotNo7                                           ,18   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sLotNo8                                           ,19   ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial1                                          ,0    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial2                                          ,1    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial3                                          ,2    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial4                                          ,3    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial5                                          ,4    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial6                                          ,5    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial7                                          ,6    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sSerial8                                          ,7    ,00000000,00000000,00000000,00000040,0    ,20  
+TAG1,sTime                                             ,11   ,00000000,00000000,00000000,00000040,0    ,15  
+TAG1,ntfPressureSamples                                ,1    ,00000000,00000000,00000000,00000200,200  ,0   
+TAG1,Log                                               ,1    ,00000000,00000000,00000000,00000800,200  ,150 

@@ -1,0 +1,282 @@
+CREATE T.ARRAY
+&EMOWatchdog ,
+&Powerup ,
+&RunTest ,
+ 0 ,
+CREATE V.ARRAY
+^Af_AveragingTime ,
+^bAirFill ,
+^bBumpPressure ,
+^bFail1 ,
+^bFail2 ,
+^bFail3 ,
+^bFail4 ,
+^bFail5 ,
+^bFail6 ,
+^bFail7 ,
+^bFail8 ,
+^bFlash ,
+^bHeadDownAbort ,
+^bPass1 ,
+^bPass2 ,
+^bPass3 ,
+^bPass4 ,
+^bPass5 ,
+^bPass6 ,
+^bPass7 ,
+^bPass8 ,
+^bPressurize ,
+^bStartTest ,
+^bStopTest ,
+^bTareVisionSystem ,
+^bTesting ,
+^bVisionRunning ,
+^bVisionSystemAbort ,
+^bVisionSystemRunning ,
+^bWatchdog ,
+^bWatchdogExpired ,
+^fAirTarget ,
+^fBleedPressure ,
+^fBoost ,
+^fBumpPercent ,
+^fPercTargetPressure ,
+^fPistonRatio ,
+^fPressure ,
+^fPressureOffset ,
+^fPressureSampleTime ,
+^fPressureTotals ,
+^fRegVal ,
+^fStabAveragingTotal ,
+^fStabilizedPressure ,
+^fStabilizedPressureLast ,
+^fStabPressureDiff ,
+^fStopPercent ,
+^fTargetPressure ,
+^fWatchdogTimeout ,
+^iEMO ,
+^iHeadDown ,
+^iLightCurtainInterrupted ,
+^iStartTest ,
+^nAbovePressureCounts ,
+^nAirPressCounts ,
+^nHeadDownCounts ,
+^nLogIndex ,
+^nPressureSampleCounts ,
+^nSampleCount ,
+^nStabAveragingIndex ,
+^nStallCounts ,
+^oAirToCylinders ,
+^oAirToPump ,
+^oBleed ,
+^oFill ,
+^oFillLast ,
+^oLower ,
+^oRaise ,
+^oRaiseLast ,
+^oWaterToPump ,
+*sDate ,
+*sLog ,
+*sLotNo1 ,
+*sLotNo2 ,
+*sLotNo3 ,
+*sLotNo4 ,
+*sLotNo5 ,
+*sLotNo6 ,
+*sLotNo7 ,
+*sLotNo8 ,
+*sSerial1 ,
+*sSerial2 ,
+*sSerial3 ,
+*sSerial4 ,
+*sSerial5 ,
+*sSerial6 ,
+*sSerial7 ,
+*sSerial8 ,
+*sTime ,
+*_HSV_SEMA ,
+*_HSV_TEMP ,
+ 0 ,
+CREATE TI.ARRAY
+^utAveragingTimer ,
+^utFillTimeout ,
+^utFlashTimer ,
+^utInc ,
+^utPressureSampleTimer ,
+^utRaiseTimeout ,
+^utVisionTimeout ,
+^utWatchdogTimer ,
+ 0 ,
+CREATE PTR.ARRAY
+ 0 ,
+CREATE TA.ARRAY 
+}ntfPressureSamples ,
+{Log ,
+ 0 ,
+CREATE PTRTABLE.ARRAY 
+ 0 ,
+CREATE B.ARRAY
+%GPPIO ,
+ 0 ,
+CREATE P.ARRAY
+~AirToCylinders ,
+~AirToPump ,
+~Bleed ,
+~Down ,
+~EMO ,
+~FailLED1 ,
+~FailLED2 ,
+~FailLED3 ,
+~FailLED4 ,
+~FailLED5 ,
+~FailLED6 ,
+~FailLED7 ,
+~FailLED8 ,
+~FillTank ,
+~GantryDown ,
+~LightCurtain ,
+~StartButton ,
+~Up ,
+~WaterToPump ,
+~Balluff_0_3625 ,
+~EPReg ,
+ 0 ,
+CREATE PID.ARRAY
+ 0 ,
+CREATE E/R.ARRAY
+ 0 ,
+CREATE E/RGROUP.ARRAY
+ 0 ,
+: CONFIG_PORTS
+;
+: W_INIT_IO
+CONFIG_PORTS
+" %GPPIO  (1/1)" *_HSV_INIT_IO $MOVE 0 ^_HNV_INIT_IO @!
+%GPPIO ENABLE
+ " Initializing variables" *_HSV_INIT_IO $MOVE
+0.00000000 ^Af_AveragingTime @!
+0 ^bAirFill @!
+0 ^bBumpPressure @!
+0 ^bFail1 @!
+0 ^bFail2 @!
+0 ^bFail3 @!
+0 ^bFail4 @!
+0 ^bFail5 @!
+0 ^bFail6 @!
+0 ^bFail7 @!
+0 ^bFail8 @!
+0 ^bFlash @!
+0 ^bHeadDownAbort @!
+0 ^bPass1 @!
+0 ^bPass2 @!
+0 ^bPass3 @!
+0 ^bPass4 @!
+0 ^bPass5 @!
+0 ^bPass6 @!
+0 ^bPass7 @!
+0 ^bPass8 @!
+0 ^bPressurize @!
+0 ^bStartTest @!
+0 ^bStopTest @!
+0 ^bTareVisionSystem @!
+0 ^bTesting @!
+0 ^bVisionRunning @!
+0 ^bVisionSystemAbort @!
+0 ^bVisionSystemRunning @!
+0 ^bWatchdog @!
+0 ^bWatchdogExpired @!
+85.000000 ^fAirTarget @!
+10.000000 ^fBleedPressure @!
+0.00000000 ^fBoost @!
+100.50000 ^fBumpPercent @!
+0.00000000 ^fPercTargetPressure @!
+35.000000 ^fPistonRatio @!
+0.00000000 ^fPressure @!
+0.00000000 ^fPressureOffset @!
+0.10000000 ^fPressureSampleTime @!
+0.00000000 ^fPressureTotals @!
+0.00000000 ^fRegVal @!
+0.00000000 ^fStabAveragingTotal @!
+0.00000000 ^fStabilizedPressure @!
+0.00000000 ^fStabilizedPressureLast @!
+0.00000000 ^fStabPressureDiff @!
+102.00000 ^fStopPercent @!
+2500.0000 ^fTargetPressure @!
+10.000000 ^fWatchdogTimeout @!
+0 ^iEMO @!
+0 ^iHeadDown @!
+0 ^iLightCurtainInterrupted @!
+0 ^iStartTest @!
+0 ^nAbovePressureCounts @!
+0 ^nAirPressCounts @!
+0 ^nHeadDownCounts @!
+0 ^nPressureSampleCounts @!
+70 ^nSampleCount @!
+0 ^nStabAveragingIndex @!
+0 ^nStallCounts @!
+0 ^oAirToCylinders @!
+0 ^oAirToPump @!
+0 ^oBleed @!
+0 ^oFill @!
+0 ^oFillLast @!
+0 ^oLower @!
+0 ^oRaise @!
+0 ^oRaiseLast @!
+0 ^oWaterToPump @!
+0.0 ^utAveragingTimer SetTimer
+0.0 ^utFillTimeout SetTimer
+0.0 ^utFlashTimer SetTimer
+0.0 ^utInc SetTimer
+0.0 ^utPressureSampleTimer SetTimer
+0.0 ^utRaiseTimeout SetTimer
+0.0 ^utVisionTimeout SetTimer
+0.0 ^utWatchdogTimer SetTimer
+0.00000000 0 -1 }ntfPressureSamples InitTable
+" "
+ *sDate $MOVE
+" "
+ *sLog $MOVE
+" "
+ *sLotNo1 $MOVE
+" "
+ *sLotNo2 $MOVE
+" "
+ *sLotNo3 $MOVE
+" "
+ *sLotNo4 $MOVE
+" "
+ *sLotNo5 $MOVE
+" "
+ *sLotNo6 $MOVE
+" "
+ *sLotNo7 $MOVE
+" "
+ *sLotNo8 $MOVE
+" "
+ *sSerial1 $MOVE
+" "
+ *sSerial2 $MOVE
+" "
+ *sSerial3 $MOVE
+" "
+ *sSerial4 $MOVE
+" "
+ *sSerial5 $MOVE
+" "
+ *sSerial6 $MOVE
+" "
+ *sSerial7 $MOVE
+" "
+ *sSerial8 $MOVE
+" "
+ *sTime $MOVE
+ " " *_HSV_INIT_IO $MOVE
+;
+T: T_INIT_IO
+W_INIT_IO
+&Powerup START.T DROP
+T;
+&_INIT_IO ' T_INIT_IO  SETTASK
+   : _RUN
+   CLEARERRORS
+   &_INIT_IO START.T DROP
+   ;

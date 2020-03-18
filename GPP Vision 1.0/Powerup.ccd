@@ -1,0 +1,193 @@
+: 0_0
+
+1 LINE.NUM
+  ^fPressureSampleTime @@ 
+  ^utPressureSampleTimer @!   
+0 JUMP ;
+: 0_2
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM &EMOWatchdog  START.T DROP  
+5 LINE.NUM ^bStartTest @@ IF 
+6 LINE.NUM 1 ^bTesting @! 
+7 LINE.NUM THEN 
+9 LINE.NUM ^bStopTest @@ IF 
+10 LINE.NUM 0 ^bStartTest @! 
+11 LINE.NUM 0 ^bTesting @! 
+12 LINE.NUM 0 ^bStopTest @! 
+13 LINE.NUM 0 ^oRaise @! 
+14 LINE.NUM 0 ^oLower @! 
+15 LINE.NUM THEN 
+17 LINE.NUM ^bTesting @@ IF 
+18 LINE.NUM &RunTest  START.T DROP  
+19 LINE.NUM ELSE 
+20 LINE.NUM &RunTest  STOP.T 
+21 LINE.NUM THEN 
+3 JUMP ;
+: 0_4
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM ^iHeadDown @@ LNOT  IF 
+4 LINE.NUM ^bPressurize @@ IF 
+5 LINE.NUM 1 ^bStopTest @! 
+6 LINE.NUM 0 ^bStartTest @! 
+7 LINE.NUM 0 ^bPressurize @! 
+8 LINE.NUM " test stopped: lost head prox" *sLog  $MOVE 
+9 LINE.NUM 1 ^bHeadDownAbort @! 
+10 LINE.NUM THEN 
+11 LINE.NUM THEN 
+13 LINE.NUM ^iLightCurtainInterrupted @@ IF 
+14 LINE.NUM ^bTesting @@ IF 
+15 LINE.NUM 1 ^bStopTest @! 
+16 LINE.NUM 0 ^bStartTest @! 
+17 LINE.NUM " test stopped: light curtain" *sLog  $MOVE 
+18 LINE.NUM THEN 
+19 LINE.NUM 1 ^bStopTest @! 
+20 LINE.NUM 0 ^oAirToCylinders @! 
+21 LINE.NUM 0 ^oAirToPump @! 
+22 LINE.NUM 0 ^oBleed @! 
+23 LINE.NUM 0 ^oFill @! 
+24 LINE.NUM 0 ^oLower @! 
+25 LINE.NUM 0 ^oRaise @! 
+26 LINE.NUM 0 ^oWaterToPump @! 
+27 LINE.NUM 0 I>F ^fRegVal @! 
+28 LINE.NUM THEN 
+4 JUMP ;
+: 0_5
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM ^fRegVal @@ ~EPReg @! 
+5 LINE.NUM ^oBleed @@ ~Bleed @! 
+6 LINE.NUM ^oAirToCylinders @@ ~AirToCylinders @! 
+7 LINE.NUM ^oAirToPump @@ ~AirToPump @! 
+8 LINE.NUM ^oWaterToPump @@ ~WaterToPump @! 
+9 LINE.NUM ^oFill @@ ~FillTank @! 
+10 LINE.NUM ^oRaise @@ ~Up @! 
+11 LINE.NUM ^oLower @@ ~Down @! 
+13 LINE.NUM ~GantryDown @@I ^iHeadDown @! 
+14 LINE.NUM ~EMO @@I LNOT  ^iEMO @! 
+15 LINE.NUM ~LightCurtain @@I 0 = ^iEMO @@ 1 = LAND  ^iLightCurtainInterrupted @! 
+16 LINE.NUM ~StartButton @@I ^iStartTest @! 
+4 JUMP ;
+: 0_9
+-4 JUMP ;
+: 0_11
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM ^bTesting @@ LNOT  IF 
+4 LINE.NUM 0 ^bPressurize @! 
+5 LINE.NUM 0 ^bAirFill @! 
+6 LINE.NUM 0 I>F ^fRegVal @! 
+7 LINE.NUM 0 ^oBleed @! 
+8 LINE.NUM 0 ^oAirToCylinders @! 
+9 LINE.NUM 0 ^oAirToPump @! 
+10 LINE.NUM 0 ^oWaterToPump @! 
+11 LINE.NUM 0 ^bTareVisionSystem @! 
+12 LINE.NUM ELSE 
+13 LINE.NUM 1 ^oLower @! 
+14 LINE.NUM 0 ^oRaise @! 
+15 LINE.NUM 0 ^oFill @! 
+16 LINE.NUM THEN 
+18 LINE.NUM ^oRaise @@ ^oRaiseLast @@ LNOT  LAND  IF 
+19 LINE.NUM 600 I>F ^utRaiseTimeout @! 
+20 LINE.NUM THEN 
+22 LINE.NUM ^oRaise @@ LNOT  IF 
+23 LINE.NUM 600 I>F ^utRaiseTimeout @! 
+24 LINE.NUM THEN 
+26 LINE.NUM ^utRaiseTimeout  T0= IF 
+27 LINE.NUM 0 ^oRaise @! 
+28 LINE.NUM THEN 
+30 LINE.NUM ^oRaise @@ ^oRaiseLast @! 
+32 LINE.NUM ^oFill @@ ^oFillLast @@ LNOT  LAND  IF 
+33 LINE.NUM 600 I>F ^utFillTimeout @! 
+34 LINE.NUM THEN 
+36 LINE.NUM ^oFill @@ LNOT  IF 
+37 LINE.NUM 600 I>F ^utFillTimeout @! 
+38 LINE.NUM THEN 
+40 LINE.NUM ^utFillTimeout  T0= IF 
+41 LINE.NUM 0 ^oFill @! 
+42 LINE.NUM THEN 
+44 LINE.NUM ^oFill @@ ^oFillLast @! 
+-4 JUMP ;
+: 0_15
+1 LINE.NUM 5  DELAY 
+3 LINE.NUM *sLog " " $= LNOT  IF 
+4 LINE.NUM *sDate  0 DATE>$ 
+5 LINE.NUM *sTime  TIME>$ 
+6 LINE.NUM *_HSV_SEMA Acquire1String *sDate  *_HSV_TEMP $MOVE "  "  *_HSV_TEMP $CAT *sTime  *_HSV_TEMP $CAT " : "  *_HSV_TEMP $CAT *sLog  *_HSV_TEMP $CAT *_HSV_TEMP ^nLogIndex @@ {Log $TABLE@ $MOVE Release1String 
+7 LINE.NUM  4  -22000 0 ^nLogIndex @@ {Log $TABLE@  AddToMessageQueue 
+8 LINE.NUM ^nLogIndex @@ 1 +  ^nLogIndex @! 
+9 LINE.NUM ^nLogIndex @@ {Log  TableSize@ >= IF 
+10 LINE.NUM 0 ^nLogIndex @! 
+11 LINE.NUM THEN 
+12 LINE.NUM " " *sLog  $MOVE 
+13 LINE.NUM THEN 
+-3 JUMP ;
+: 0_18
+2 LINE.NUM ^nPressureSampleCounts @@ 1 +  ^nPressureSampleCounts @! 
+3 LINE.NUM ^fPressureTotals @@ ~Balluff_0_3625 @@ F+ ^fPressureOffset @@ F+ ^fPressureTotals @! 
+5 LINE.NUM ^utPressureSampleTimer  T0= IF 
+6 LINE.NUM ^fPressureTotals @@ ^nPressureSampleCounts @@F F/  Truncate 6 I>F F<= IF 
+7 LINE.NUM 0 I>F ^fPressure @! 
+8 LINE.NUM ELSE 
+9 LINE.NUM ^fPressureTotals @@ ^nPressureSampleCounts @@F F/  Truncate ^fPressure @! 
+10 LINE.NUM THEN 
+11 LINE.NUM 0 I>F ^fPressureTotals @! 
+12 LINE.NUM 0 ^nPressureSampleCounts @! 
+13 LINE.NUM ^fPressureSampleTime @@ ^utPressureSampleTimer @! 
+14 LINE.NUM THEN 
+16 LINE.NUM ^fTargetPressure @@ 0 I>F F> IF 
+17 LINE.NUM ^fPressure @@ ^fTargetPressure @@ F/ 1.00000000e+002 F* ^fPercTargetPressure @! 
+18 LINE.NUM ELSE 
+18 LINE.NUM ^fAirTarget @@ 0 I>F F> IF 
+19 LINE.NUM ^fPressure @@ ^fAirTarget @@ F/ 1.00000000e+002 F* ^fPercTargetPressure @! 
+20 LINE.NUM ELSE 
+21 LINE.NUM 0 I>F ^fPercTargetPressure @! 
+22 LINE.NUM THEN THEN 
+25 LINE.NUM ^nStabAveragingIndex @@ 1 +  ^nStabAveragingIndex @! 
+26 LINE.NUM ^fStabAveragingTotal @@ ^fPressure @@ F+ ^fStabAveragingTotal @! 
+28 LINE.NUM ^nStabAveragingIndex @@ ^nSampleCount @@ >= IF 
+29 LINE.NUM 0 ^nStabAveragingIndex @! 
+30 LINE.NUM ^fStabilizedPressure @@ ^fStabilizedPressureLast @! 
+31 LINE.NUM ^fStabAveragingTotal @@ ^nSampleCount @@F F/ ^fStabilizedPressure @! 
+32 LINE.NUM ^fStabilizedPressure @@ ^fStabilizedPressureLast @@ F- ^fStabPressureDiff @! 
+33 LINE.NUM 0 I>F ^fStabAveragingTotal @! 
+34 LINE.NUM ^utAveragingTimer @@F ^Af_AveragingTime @! 
+35 LINE.NUM 10 I>F ^utAveragingTimer @! 
+36 LINE.NUM THEN 
+-5 JUMP ;
+: 0_21
+2 LINE.NUM ^utFlashTimer @@F 0 I>F F= ^utFlashTimer  T0= LOR  IF 
+3 LINE.NUM 5.00000000e-001 ^utFlashTimer @! 
+4 LINE.NUM ^bFlash @@ LNOT  ^bFlash @! 
+5 LINE.NUM THEN 
+7 LINE.NUM ^bFlash @@ IF 
+8 LINE.NUM ^bFail1 @@ ~FailLED1 @! 
+9 LINE.NUM ^bFail2 @@ ~FailLED2 @! 
+10 LINE.NUM ^bFail3 @@ ~FailLED3 @! 
+11 LINE.NUM ^bFail4 @@ ~FailLED4 @! 
+12 LINE.NUM ^bFail5 @@ ~FailLED5 @! 
+13 LINE.NUM ^bFail6 @@ ~FailLED6 @! 
+14 LINE.NUM ^bFail7 @@ ~FailLED7 @! 
+15 LINE.NUM ^bFail8 @@ ~FailLED8 @! 
+16 LINE.NUM ELSE 
+17 LINE.NUM 0 ~FailLED1 @! 
+18 LINE.NUM 0 ~FailLED2 @! 
+19 LINE.NUM 0 ~FailLED3 @! 
+20 LINE.NUM 0 ~FailLED4 @! 
+21 LINE.NUM 0 ~FailLED5 @! 
+22 LINE.NUM 0 ~FailLED6 @! 
+23 LINE.NUM 0 ~FailLED7 @! 
+24 LINE.NUM 0 ~FailLED8 @! 
+25 LINE.NUM THEN 
+27 LINE.NUM 2  DELAY 
+-3 JUMP ;
+T: T0
+DUMMY
+0_0
+0_2
+0_4
+0_5
+0_9
+0_11
+0_15
+0_18
+0_21
+T;
+&Powerup ' T0 SETTASK

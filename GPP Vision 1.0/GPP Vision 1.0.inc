@@ -1,0 +1,7 @@
+0 ^nLogIndex @!
+\ ""DOWNLOAD_COMPRESSION_OFF
+: _TABLEINIT
+" "
+ 0 -1 {Log Init$Table ;
+_TABLEINIT
+FORGET _TABLEINIT

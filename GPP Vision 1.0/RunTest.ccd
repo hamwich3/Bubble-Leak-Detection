@@ -1,0 +1,223 @@
+: 1_0
+
+1 LINE.NUM
+  0  
+  ^nHeadDownCounts @!   
+
+2 LINE.NUM
+  ^bHeadDownAbort   FALSE@!
+0 JUMP ;
+: 1_1
+1 LINE.NUM 0 ^oRaise @! 
+2 LINE.NUM 1 ^oLower @! 
+3 LINE.NUM 1 ^oBleed @! 
+5 LINE.NUM 0 ^nAirPressCounts @! 
+6 LINE.NUM 0 ^nAbovePressureCounts @! 
+7 LINE.NUM 0 ^bBumpPressure @! 
+9 LINE.NUM 200  DELAY 
+10 LINE.NUM ^iHeadDown @@ IF 
+11 LINE.NUM ^nHeadDownCounts @@ 1 +  ^nHeadDownCounts @! 
+12 LINE.NUM ELSE 
+13 LINE.NUM 0 ^nHeadDownCounts @! 
+14 LINE.NUM THEN 
+16 LINE.NUM 0 ^bFail1 @! 
+17 LINE.NUM 0 ^bFail2 @! 
+18 LINE.NUM 0 ^bFail3 @! 
+19 LINE.NUM 0 ^bFail4 @! 
+20 LINE.NUM 0 ^bFail5 @! 
+21 LINE.NUM 0 ^bFail6 @! 
+22 LINE.NUM 0 ^bFail7 @! 
+23 LINE.NUM 0 ^bFail8 @! 
+11 JUMP ;
+: 1_2
+1 LINE.NUM 1 ^bAirFill @! 
+2 LINE.NUM 1 ^oBleed @! 
+3 LINE.NUM 0 ^oAirToPump @! 
+4 LINE.NUM 0 ^oWaterToPump @! 
+5 LINE.NUM 1 ^oAirToCylinders @! 
+6 LINE.NUM ^fAirTarget @@ 8 I>F F+ ^fRegVal @! 
+8 LINE.NUM ^fPressure @@ ^fAirTarget @@ F> IF 
+9 LINE.NUM ^nAirPressCounts @@ 1 +  ^nAirPressCounts @! 
+10 LINE.NUM ELSE 
+11 LINE.NUM 0 ^nAirPressCounts @! 
+12 LINE.NUM THEN 
+14 LINE.NUM 100  DELAY 
+9 JUMP ;
+: 1_13
+1 LINE.NUM 0 ^bAirFill @! 
+2 LINE.NUM 1 ^bPressurize @! 
+3 LINE.NUM 0 ^bBumpPressure @! 
+5 LINE.NUM 0 I>F ^fRegVal @! 
+6 LINE.NUM 0 ^oAirToCylinders @! 
+8 LINE.NUM 500  DELAY 
+10 LINE.NUM 1 ^oWaterToPump @! 
+11 LINE.NUM 1 ^oAirToPump @! 
+13 LINE.NUM 1.00000001e-001 ^utInc @! 
+14 LINE.NUM 0 I>F ^fBoost @! 
+15 LINE.NUM 0 ^nStallCounts @! 
+17 LINE.NUM ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ F/ ^fRegVal @! 
+10 JUMP ;
+: 1_14
+1 LINE.NUM 1 ^oAirToPump @! 
+3 LINE.NUM ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ ^fBoost @@ F- F/ ^fBoost @@ F+ ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ ^fBoost @@ F- F/ 1.29999995e+000 F*  FMIN ^fRegVal @! 
+5 LINE.NUM ^utInc  T0= IF 
+6 LINE.NUM ^utInc  GET.RESTART.TMR DROP  
+8 LINE.NUM ^fPercTargetPressure @@ 80 I>F F> IF 
+9 LINE.NUM ^fStabPressureDiff @@ 30 I>F F< IF 
+10 LINE.NUM ^nStallCounts @@ 1 +  ^nStallCounts @! 
+11 LINE.NUM ^nStallCounts @@ 25 > IF 
+12 LINE.NUM 0 ^nStallCounts @! 
+13 LINE.NUM ^fBoost @@ 1 I>F F+ 5 I>F  FMIN ^fBoost @! 
+14 LINE.NUM THEN 
+15 LINE.NUM ELSE 
+16 LINE.NUM 0 ^nStallCounts @! 
+17 LINE.NUM THEN 
+18 LINE.NUM THEN 
+20 LINE.NUM ^fPercTargetPressure @@ ^fStopPercent @@ F> IF 
+21 LINE.NUM ^nAbovePressureCounts @@ 1 +  ^nAbovePressureCounts @! 
+22 LINE.NUM ELSE 
+23 LINE.NUM 0 ^nAbovePressureCounts @! 
+24 LINE.NUM THEN 
+25 LINE.NUM THEN 
+27 LINE.NUM 10  DELAY 
+12 JUMP ;
+: 1_23
+2 LINE.NUM 0 ^nAbovePressureCounts @! 
+3 LINE.NUM 0 ^bBumpPressure @! 
+5 LINE.NUM 10  DELAY 
+12 JUMP ;
+: 1_26
+1 LINE.NUM 0 ^oBleed @! 
+2 LINE.NUM 0 I>F ^fRegVal @! 
+3 LINE.NUM 0 ^oAirToPump @! 
+4 LINE.NUM 0 ^oWaterToPump @! 
+5 LINE.NUM 0 ^oAirToCylinders @! 
+6 LINE.NUM 0 ^bBumpPressure @! 
+8 LINE.NUM 10  DELAY 
+9 JUMP ;
+: 1_31
+1 LINE.NUM 0 ^oLower @! 
+2 LINE.NUM 1 ^oRaise @! 
+3 LINE.NUM 0 ^bStartTest @! 
+4 LINE.NUM 0 ^bTesting @! 
+5 LINE.NUM 0 ^bStopTest @! 
+7 LINE.NUM 10000  DELAY 
+13 JUMP ;
+: 1_46
+1 LINE.NUM 1 ^bBumpPressure @! 
+5 JUMP ;
+: 1_49
+1 LINE.NUM 1 ^bTareVisionSystem @! 
+3 LINE.NUM 1000  DELAY 
+5 LINE.NUM 0 ^bTareVisionSystem @! 
+-8 JUMP ;
+: 1_57
+1 LINE.NUM 20  DELAY 
+9 JUMP ;
+: 1_61
+1 LINE.NUM 1 ^bPressurize @! 
+8 JUMP ;
+: 1_6
+TRUE
+
+1 LINE.NUM
+  ^fPressure @@ 
+  ^fAirTarget @@   F>=
+LAND
+
+2 LINE.NUM
+  ^nAirPressCounts @@ 
+  10    >=
+LAND
+IF 6 ELSE -11 THEN JUMP ;
+: 1_7
+TRUE
+
+1 LINE.NUM
+  ^nHeadDownCounts @@ 
+  10    >=
+LAND
+IF -5 ELSE -13 THEN JUMP ;
+: 1_17
+TRUE
+
+1 LINE.NUM
+  ^bPressurize @@   0<>
+LAND
+IF -11 ELSE -9 THEN JUMP ;
+: 1_18
+TRUE
+
+1 LINE.NUM
+  ^fPercTargetPressure @@ 
+  ^fBumpPercent @@   F>
+LAND
+IF -11 ELSE -8 THEN JUMP ;
+: 1_27
+TRUE
+
+1 LINE.NUM
+  ^fPressure @@ 
+  ^fBleedPressure @@   F>
+LAND
+IF -11 ELSE -10 THEN JUMP ;
+: 1_34
+TRUE
+
+1 LINE.NUM
+  ^fPercTargetPressure @@ 
+  ^fStopPercent @@   F>=
+LAND
+
+2 LINE.NUM
+  ^nAbovePressureCounts @@ 
+  10    >=
+LAND
+IF -3 ELSE -4 THEN JUMP ;
+: 1_41
+TRUE
+
+1 LINE.NUM
+  ^bPressurize @@   0<>
+LAND
+IF -4 ELSE -13 THEN JUMP ;
+: 1_52
+TRUE
+
+1 LINE.NUM
+  ^fTargetPressure @@ 
+  0.0    F=
+LAND
+IF -9 ELSE -17 THEN JUMP ;
+: 1_55
+TRUE
+
+1 LINE.NUM
+  ^bPressurize @@   0<>
+LAND
+IF -11 ELSE -15 THEN JUMP ;
+T: T1
+DUMMY
+1_0
+1_1
+1_2
+1_13
+1_14
+1_23
+1_26
+1_31
+1_46
+1_49
+1_57
+1_61
+1_6
+1_7
+1_17
+1_18
+1_27
+1_34
+1_41
+1_52
+1_55
+T;
+&RunTest ' T1 SETTASK

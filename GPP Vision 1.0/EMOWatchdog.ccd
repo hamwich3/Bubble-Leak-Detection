@@ -1,0 +1,125 @@
+: 2_0
+
+1 LINE.NUM
+  ^fWatchdogTimeout @@ 
+  ^utVisionTimeout @!   
+
+2 LINE.NUM
+  ^fWatchdogTimeout @@ 
+  ^utWatchdogTimer @!   
+
+3 LINE.NUM
+  10    DELAY
+9 JUMP ;
+: 2_58
+1 LINE.NUM ^bTesting @@ ^bWatchdogExpired @@ LAND  IF 
+2 LINE.NUM " REC4 Watchdog timeout!" *sLog  $MOVE 
+3 LINE.NUM THEN 
+5 LINE.NUM 0 ^bStartTest @! 
+6 LINE.NUM 0 ^bTesting @! 
+7 LINE.NUM 0 I>F ^fRegVal @! 
+8 LINE.NUM 0 ^bPressurize @! 
+9 LINE.NUM 0 ^bAirFill @! 
+10 LINE.NUM 0 ^oRaise @! 
+11 LINE.NUM 0 ^oLower @! 
+12 LINE.NUM 0 ^oBleed @! 
+13 LINE.NUM 0 ^oWaterToPump @! 
+14 LINE.NUM 0 ^oFill @! 
+15 LINE.NUM 0 ^oAirToPump @! 
+16 LINE.NUM 0 ^oAirToCylinders @! 
+18 LINE.NUM 10  DELAY 
+12 JUMP ;
+: 2_64
+1 LINE.NUM 1 ^bWatchdogExpired @! 
+9 JUMP ;
+: 2_65
+1 LINE.NUM 0 ^bWatchdogExpired @! 
+8 JUMP ;
+: 2_67
+1 LINE.NUM 10  DELAY 
+9 JUMP ;
+: 2_74
+4 JUMP ;
+: 2_77
+1 LINE.NUM ^fWatchdogTimeout @@ ^utWatchdogTimer @! 
+2 LINE.NUM 0 ^bWatchdog @! 
+4 JUMP ;
+: 2_84
+1 LINE.NUM 1 ^bVisionSystemRunning @! 
+2 LINE.NUM 0 ^bVisionSystemAbort @! 
+4 LINE.NUM 10  DELAY 
+-3 JUMP ;
+: 2_85
+1 LINE.NUM 0 ^bVisionSystemRunning @! 
+3 LINE.NUM ^bTesting @@ ^bVisionSystemRunning @@ LAND  IF 
+4 LINE.NUM 1 ^bVisionSystemAbort @! 
+5 LINE.NUM " Vision System watchdog timeout!" *sLog  $MOVE 
+6 LINE.NUM THEN 
+8 LINE.NUM 0 ^bStartTest @! 
+9 LINE.NUM 0 ^bTesting @! 
+10 LINE.NUM 0 I>F ^fRegVal @! 
+11 LINE.NUM 0 ^bPressurize @! 
+13 LINE.NUM 10  DELAY 
+-4 JUMP ;
+: 2_87
+1 LINE.NUM ^fWatchdogTimeout @@ ^utVisionTimeout @! 
+2 LINE.NUM 0 ^bVisionRunning @! 
+3 JUMP ;
+: 2_16
+TRUE
+
+1 LINE.NUM
+  ^bWatchdog @@   0<>
+LAND
+IF -5 ELSE 0 THEN JUMP ;
+: 2_21
+TRUE
+
+1 LINE.NUM
+  ^utWatchdogTimer   T0=
+LAND
+IF -10 ELSE -9 THEN JUMP ;
+: 2_66
+TRUE
+
+1 LINE.NUM
+  ^iEMO @@   0<>
+LAND
+
+2 LINE.NUM
+  ^bWatchdogExpired @@   0=
+LAND
+IF -9 ELSE -12 THEN JUMP ;
+: 2_86
+TRUE
+
+1 LINE.NUM
+  ^utVisionTimeout   T0=
+LAND
+IF -6 ELSE -7 THEN JUMP ;
+: 2_88
+TRUE
+
+1 LINE.NUM
+  ^bVisionRunning @@   0<>
+LAND
+IF -6 ELSE -2 THEN JUMP ;
+T: T2
+DUMMY
+2_0
+2_58
+2_64
+2_65
+2_67
+2_74
+2_77
+2_84
+2_85
+2_87
+2_16
+2_21
+2_66
+2_86
+2_88
+T;
+&EMOWatchdog ' T2 SETTASK

@@ -1,0 +1,128 @@
+0 TASK  &_INIT_IO
+0 TASK &EMOWatchdog
+0 TASK &Powerup
+0 TASK &RunTest
+0 FVAR ^Af_AveragingTime
+0 IVAR ^bAirFill
+0 IVAR ^bBumpPressure
+0 IVAR ^bFail1
+0 IVAR ^bFail2
+0 IVAR ^bFail3
+0 IVAR ^bFail4
+0 IVAR ^bFail5
+0 IVAR ^bFail6
+0 IVAR ^bFail7
+0 IVAR ^bFail8
+0 IVAR ^bFlash
+0 IVAR ^bHeadDownAbort
+0 IVAR ^bPass1
+0 IVAR ^bPass2
+0 IVAR ^bPass3
+0 IVAR ^bPass4
+0 IVAR ^bPass5
+0 IVAR ^bPass6
+0 IVAR ^bPass7
+0 IVAR ^bPass8
+0 IVAR ^bPressurize
+0 IVAR ^bStartTest
+0 IVAR ^bStopTest
+0 IVAR ^bTareVisionSystem
+0 IVAR ^bTesting
+0 IVAR ^bVisionRunning
+0 IVAR ^bVisionSystemAbort
+0 IVAR ^bVisionSystemRunning
+0 IVAR ^bWatchdog
+0 IVAR ^bWatchdogExpired
+0 FVAR ^fAirTarget
+0 FVAR ^fBleedPressure
+0 FVAR ^fBoost
+0 FVAR ^fBumpPercent
+0 FVAR ^fPercTargetPressure
+0 FVAR ^fPistonRatio
+0 FVAR ^fPressure
+0 FVAR ^fPressureOffset
+0 FVAR ^fPressureSampleTime
+0 FVAR ^fPressureTotals
+0 FVAR ^fRegVal
+0 FVAR ^fStabAveragingTotal
+0 FVAR ^fStabilizedPressure
+0 FVAR ^fStabilizedPressureLast
+0 FVAR ^fStabPressureDiff
+0 FVAR ^fStopPercent
+0 FVAR ^fTargetPressure
+0 FVAR ^fWatchdogTimeout
+0 IVAR ^iEMO
+0 IVAR ^iHeadDown
+0 IVAR ^iLightCurtainInterrupted
+0 IVAR ^iStartTest
+0 IVAR ^nAbovePressureCounts
+0 IVAR ^nAirPressCounts
+0 IVAR ^nHeadDownCounts
+1073741824 IVAR ^nLogIndex
+0 IVAR ^nPressureSampleCounts
+0 IVAR ^nSampleCount
+0 IVAR ^nStabAveragingIndex
+0 IVAR ^nStallCounts
+0 IVAR ^oAirToCylinders
+0 IVAR ^oAirToPump
+0 IVAR ^oBleed
+0 IVAR ^oFill
+0 IVAR ^oFillLast
+0 IVAR ^oLower
+0 IVAR ^oRaise
+0 IVAR ^oRaiseLast
+0 IVAR ^oWaterToPump
+0 UTVAR ^utAveragingTimer
+0 UTVAR ^utFillTimeout
+0 UTVAR ^utFlashTimer
+0 UTVAR ^utInc
+0 UTVAR ^utPressureSampleTimer
+0 UTVAR ^utRaiseTimeout
+0 UTVAR ^utVisionTimeout
+0 UTVAR ^utWatchdogTimer
+15 0 $VAR *sDate 
+100 0 $VAR *sLog 
+20 0 $VAR *sLotNo1 
+20 0 $VAR *sLotNo2 
+20 0 $VAR *sLotNo3 
+20 0 $VAR *sLotNo4 
+20 0 $VAR *sLotNo5 
+20 0 $VAR *sLotNo6 
+20 0 $VAR *sLotNo7 
+20 0 $VAR *sLotNo8 
+20 0 $VAR *sSerial1 
+20 0 $VAR *sSerial2 
+20 0 $VAR *sSerial3 
+20 0 $VAR *sSerial4 
+20 0 $VAR *sSerial5 
+20 0 $VAR *sSerial6 
+20 0 $VAR *sSerial7 
+20 0 $VAR *sSerial8 
+15 0 $VAR *sTime 
+200 0 FTABLE }ntfPressureSamples
+200 150 1073741824 $TABLE {Log 
+
+nullM64BOARD $FFFFFFFE $FFFFFFFE 16 32769 1.000000 0.010000 0.000000 2001 $7F000001 0 11 BOARD.MMP %GPPIO
+ 2 $80000001 APOINT    0.0000 $A5  0  0 %GPPIO 0 POINT.TNG ~EPReg
+ 130.0000    0.0000 ~EPReg SET.SCALE
+ 2 $40000001 APOINT -3625.0000 $C  0  1 %GPPIO 0 20.000000 1 POINT.TNGX ~Balluff_0_3625
+3625.0000 -3625.0000 ~Balluff_0_3625 SET.SCALE
+32 $80000001 SPOINT 0.0    OUTPUT  0  2 %GPPIO 0 POINT.TNG ~FailLED1
+32 $80000001 SPOINT 0.0    OUTPUT  1  2 %GPPIO 0 POINT.TNG ~FailLED2
+32 $80000001 SPOINT 0.0    OUTPUT  2  2 %GPPIO 0 POINT.TNG ~FailLED3
+32 $80000001 SPOINT 0.0    OUTPUT  3  2 %GPPIO 0 POINT.TNG ~FailLED4
+32 $80000001 SPOINT 0.0    OUTPUT  4  2 %GPPIO 0 POINT.TNG ~FailLED5
+32 $80000001 SPOINT 0.0    OUTPUT  5  2 %GPPIO 0 POINT.TNG ~FailLED6
+32 $80000001 SPOINT 0.0    OUTPUT  6  2 %GPPIO 0 POINT.TNG ~FailLED7
+32 $80000001 SPOINT 0.0    OUTPUT  7  2 %GPPIO 0 POINT.TNG ~FailLED8
+32 $80000001 SPOINT 0.0    OUTPUT  8  2 %GPPIO 0 POINT.TNG ~Bleed
+32 $80000001 SPOINT 0.0    OUTPUT  9  2 %GPPIO 0 POINT.TNG ~AirToCylinders
+32 $80000001 SPOINT 0.0    OUTPUT 10  2 %GPPIO 0 POINT.TNG ~AirToPump
+32 $80000001 SPOINT 0.0    OUTPUT 11  2 %GPPIO 0 POINT.TNG ~WaterToPump
+32 $80000001 SPOINT 0.0    OUTPUT 12  2 %GPPIO 0 POINT.TNG ~FillTank
+32 $80000001 SPOINT 0.0    OUTPUT 14  2 %GPPIO 0 POINT.TNG ~Up
+32 $80000001 SPOINT 0.0    OUTPUT 15  2 %GPPIO 0 POINT.TNG ~Down
+ 4 $40000001 SPOINT 0.0     INPUT  0  3 %GPPIO 0 POINT.TNG ~GantryDown
+ 4 $40000001 SPOINT 0.0     INPUT  1  3 %GPPIO 0 POINT.TNG ~StartButton
+ 4 $40000001 SPOINT 0.0     INPUT  2  3 %GPPIO 0 POINT.TNG ~EMO
+ 4 $40000001 SPOINT 0.0     INPUT  3  3 %GPPIO 0 POINT.TNG ~LightCurtain
