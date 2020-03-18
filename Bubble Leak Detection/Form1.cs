@@ -29,7 +29,6 @@ namespace Bubble_Leak_Detection
         bool updateOverlay1 = false;
         bool updateOverlay2 = false;
 
-        TensorObjectDetection CylinderLocator;
         TensorObjectDetection LeakLocator;
         TensorClassificationModel LeakClassifier;
 
@@ -50,11 +49,11 @@ namespace Bubble_Leak_Detection
         int frameIndex1 = 0;
         int frameIndex2 = 1;
 
-        public Form1(TensorObjectDetection leak, TensorObjectDetection cylinder, TensorClassificationModel classifier, string pacip)
+        public Form1(TensorObjectDetection leak, TensorClassificationModel classifier, string pacip)
         {
             InitializeComponent();
             LeakLocator = leak;
-            CylinderLocator = cylinder;
+            //CylinderLocator = cylinder;
             LeakClassifier = classifier;
             PACIP = pacip;
             this.TopMost = false;
@@ -63,17 +62,6 @@ namespace Bubble_Leak_Detection
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadAssets();
-        }
-
-        private void PAC_HeadDown(object source, EventArgs e)
-        {
-            Action getThresh = new Action(() =>
-            {
-                Thread.Sleep(5000);
-                SetROIsOnCylinders();
-
-            });
-            //getThresh.Invoke();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -121,7 +109,6 @@ namespace Bubble_Leak_Detection
             Sectors.Initialize();
             StartCameras();
             StartImageThreads();
-            PAC.HeadDown += PAC_HeadDown;
             PAC.StopTakeThreshold += PAC_StopTakeThreshold;
             PAC.StartTakeThreshold += PAC_StartTakeThreshold;
             PAC.StopTest += PAC_StopTest;
@@ -707,58 +694,6 @@ namespace Bubble_Leak_Detection
             if (mouseHold2) updateOverlay2 = true;
         }
 
-        private void SetROIsOnCylinders()
-        {
-            Rectangle[] rect1;
-            Rectangle[] rect2;
-            Rectangle[] rect3;
-            Rectangle[] rect4;
-            Rectangle[] rect5;
-            Rectangle[] rect6;
-            Rectangle[] rect7;
-            Rectangle[] rect8;
-
-            lock (Sectors._lock1)
-            {
-                Bitmap bmp = (Bitmap)icImagingControl1.ImageActiveBuffer.Bitmap.Clone();
-                Sectors.ExtractSectorsDevice1(bmp);
-                var rect1Prob = CylinderLocator.DetectObjects(Sectors.Quadrant1, Sectors.Quadrant1Rect, out rect1)[0];
-                var rect2Prob = CylinderLocator.DetectObjects(Sectors.Quadrant2, Sectors.Quadrant2Rect, out rect2)[0];
-                var rect5Prob = CylinderLocator.DetectObjects(Sectors.Quadrant5, Sectors.Quadrant5Rect, out rect5)[0];
-                var rect6Prob = CylinderLocator.DetectObjects(Sectors.Quadrant6, Sectors.Quadrant6Rect, out rect6)[0];
-
-                Console.WriteLine($"rect1prob={rect1Prob}");
-                Console.WriteLine($"rect2prob={rect2Prob}");
-                Console.WriteLine($"rect5prob={rect5Prob}");
-                Console.WriteLine($"rect6prob={rect6Prob}");
-
-                if (rect1Prob > 0.7) Sectors.Region1 = ResizeRectOnCenter(rect1[0]);
-                if (rect2Prob > 0.7) Sectors.Region2 = ResizeRectOnCenter(rect2[0]);
-                if (rect5Prob > 0.7) Sectors.Region5 = ResizeRectOnCenter(rect5[0]);
-                if (rect6Prob > 0.7) Sectors.Region6 = ResizeRectOnCenter(rect6[0]);
-
-            }
-            lock (Sectors._lock2)
-            {
-                Bitmap bmp = (Bitmap)icImagingControl2.ImageActiveBuffer.Bitmap.Clone();
-                Sectors.ExtractSectorsDevice2(bmp);
-                var rect3Prob = CylinderLocator.DetectObjects(Sectors.Quadrant3, Sectors.Quadrant3Rect, out rect3)[0];
-                var rect4Prob = CylinderLocator.DetectObjects(Sectors.Quadrant4, Sectors.Quadrant4Rect, out rect4)[0];
-                var rect7Prob = CylinderLocator.DetectObjects(Sectors.Quadrant7, Sectors.Quadrant7Rect, out rect7)[0];
-                var rect8Prob = CylinderLocator.DetectObjects(Sectors.Quadrant8, Sectors.Quadrant8Rect, out rect8)[0];
-
-                Console.WriteLine($"rect3prob={rect3Prob}");
-                Console.WriteLine($"rect4prob={rect4Prob}");
-                Console.WriteLine($"rect7prob={rect7Prob}");
-                Console.WriteLine($"rect8prob={rect8Prob}");
-
-                if (rect3Prob > 0.7) Sectors.Region3 = ResizeRectOnCenter(rect3[0]);
-                if (rect4Prob > 0.7) Sectors.Region4 = ResizeRectOnCenter(rect4[0]);
-                if (rect7Prob > 0.7) Sectors.Region7 = ResizeRectOnCenter(rect7[0]);
-                if (rect8Prob > 0.7) Sectors.Region8 = ResizeRectOnCenter(rect8[0]);
-            }
-        }
-
         private Rectangle ResizeRectOnCenter(Rectangle original)
         {
             //get center x,y
@@ -1065,11 +1000,6 @@ namespace Bubble_Leak_Detection
             {
                 MessageBox.Show(ex.ToString());
             }
-        }
-
-        private void button1_Click_3(object sender, EventArgs e)
-        {
-            SetROIsOnCylinders();
         }
 
         private void icImagingControl1_OverlayUpdate(object sender, ICImagingControl.OverlayUpdateEventArgs e)

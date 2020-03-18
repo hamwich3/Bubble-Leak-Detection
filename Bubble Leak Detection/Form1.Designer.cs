@@ -78,7 +78,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbSector1 = new System.Windows.Forms.TextBox();
             this.timerCapture = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.tbRadius = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.btnFail1 = new System.Windows.Forms.Button();
@@ -250,7 +249,6 @@
             this.gbCaptureImages.Controls.Add(this.label16);
             this.gbCaptureImages.Controls.Add(this.tbSector8);
             this.gbCaptureImages.Controls.Add(this.label13);
-            this.gbCaptureImages.Controls.Add(this.button1);
             this.gbCaptureImages.Controls.Add(this.label14);
             this.gbCaptureImages.Controls.Add(this.tbSector7);
             this.gbCaptureImages.Controls.Add(this.label11);
@@ -602,16 +600,6 @@
             this.timerCapture.Interval = 600;
             this.timerCapture.Tick += new System.EventHandler(this.timerCapture_Tick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1501, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Find Cylinders";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_3);
-            // 
             // tbRadius
             // 
             this.tbRadius.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -741,7 +729,7 @@
             this.Controls.Add(this.gbCaptureImages);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Galiso Bubble Detection";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -804,7 +792,6 @@
         private System.Windows.Forms.ToolStripMenuItem properties2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopLiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startLiveToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox tbRadius;

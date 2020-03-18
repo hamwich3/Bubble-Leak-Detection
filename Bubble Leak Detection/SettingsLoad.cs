@@ -20,14 +20,12 @@ namespace Bubble_Leak_Detection
     {
         bool model1OK = false;
         bool model2OK = false;
-        bool model3OK = false;
         bool PACOK = false;
         bool device1OK = false;
         bool device2OK = false;
 
         string model1SettingsPath;
         string model2SettingsPath;
-        string model3SettingsPath;
         string PACSettingsPath;
 
         bool autostart = true;
@@ -37,8 +35,7 @@ namespace Bubble_Leak_Detection
 
         bool okToClose = true;
         string dir = "";
-
-        TensorObjectDetection CylinderLocator;
+        
         TensorObjectDetection LeakLocator;
         TensorClassificationModel LeakClassifier;
         ICImagingControl ic = new ICImagingControl();
@@ -51,7 +48,6 @@ namespace Bubble_Leak_Detection
             dir = Directory.GetCurrentDirectory();
             model1SettingsPath = Path.Combine(dir, "model1.path");
             model2SettingsPath = Path.Combine(dir, "model2.path");
-            model3SettingsPath = Path.Combine(dir, "model3.path");
             PACSettingsPath = Path.Combine(dir, "opto22.ip");
             LoadSettingsFiles();
             timer1.Start();
@@ -81,17 +77,6 @@ namespace Bubble_Leak_Detection
                 tbModel2.Text = path2;
             }
 
-            if (File.Exists(model3SettingsPath))
-            {
-                tbModel3.Text = File.ReadAllText(model3SettingsPath);
-            }
-            else
-            {
-                string path3 = Path.Combine(dir, "Tensorflow", "CylinderLocator i3", "model.pb");
-                File.WriteAllText(model3SettingsPath, path3);
-                tbModel3.Text = path3;
-            }
-
             if (File.Exists(PACSettingsPath))
             {
                 tbIP.Text = File.ReadAllText(PACSettingsPath);
@@ -118,12 +103,6 @@ namespace Bubble_Leak_Detection
                 model2OK = false;
             }
             else model2OK = true;
-            if (tbModel3.Text == "" || !File.Exists(tbModel3.Text))
-            {
-                AddStatus("Cylinder Detector model.pb not found!");
-                model3OK = false;
-            }
-            else model3OK = true;
             if (ic.Devices.Length < 2)
             {
                 AddStatus($"{ic.Devices.Length} camera(s) detected!");
@@ -138,7 +117,7 @@ namespace Bubble_Leak_Detection
                 device2OK = true;
             }
             PACOK = await PingPAC();
-            return (model1OK && model2OK && model3OK && PACOK && device1OK && device2OK);
+            return (model1OK && model2OK && PACOK && device1OK && device2OK);
         }
 
         private void LoadBubbleDetector()
@@ -148,7 +127,6 @@ namespace Bubble_Leak_Detection
             sw.Start();
             bool thread1complete = false;
             bool thread2complete = false;
-            bool thread3complete = false;
             pBarValue = 10;
             Thread initLeakLocator = new Thread(() =>
             {
@@ -168,18 +146,9 @@ namespace Bubble_Leak_Detection
                 lock (_lock) pBarValue += 30;
                 thread2complete = true;
             });
-            Thread initCylinderLocator = new Thread(() =>
-            {
-                AddStatus("Loading CylinderLocator...");
-                CylinderLocator = new TensorObjectDetection();
-                CylinderLocator.LoadModel(tbModel3.Text);
-                AddStatus($"Finished Loading CylinderLocator in {sw.ElapsedMilliseconds}ms");
-                lock (_lock) pBarValue += 30;
-                thread3complete = true;
-            });
             Thread waitforload = new Thread(() =>
             {
-                while (!(thread1complete && thread2complete && thread3complete))
+                while (!(thread1complete && thread2complete))
                 {
                     Thread.Sleep(100);
                 }
@@ -187,11 +156,10 @@ namespace Bubble_Leak_Detection
                 Thread.Sleep(1000);
                 initLeakLocator.Join();
                 initLeakClassifier.Join();
-                initCylinderLocator.Join();
                 AddStatus("Opening Bubble Detector...");
                 this.Invoke(new Action(() =>
                 {
-                    var app = new Form1(LeakLocator, CylinderLocator, LeakClassifier, tbIP.Text);
+                    var app = new Form1(LeakLocator, LeakClassifier, tbIP.Text);
                     app.StartPosition = FormStartPosition.Manual;
                     try
                     {
@@ -209,7 +177,6 @@ namespace Bubble_Leak_Detection
             waitforload.Start();
             initLeakLocator.Start();
             initLeakClassifier.Start();
-            initCylinderLocator.Start();
         }
 
         private void AddStatus(string statusMessage)
@@ -275,7 +242,6 @@ namespace Bubble_Leak_Detection
         {
             File.WriteAllText(model1SettingsPath, tbModel1.Text);
             File.WriteAllText(model2SettingsPath, tbModel2.Text);
-            File.WriteAllText(model3SettingsPath, tbModel3.Text);
             File.WriteAllText(PACSettingsPath, tbIP.Text);
             cbEdit.Checked = false;
         }
