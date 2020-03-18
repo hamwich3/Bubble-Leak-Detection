@@ -2,9 +2,9 @@
 
 # PAC CONTROL TAG DATABASE DUMP
 # ----------------------------------------------------------------
-# NAME :         C:\Users\J20V4J2\Documents\Visual Studio 2017\Projects\Bubble Leak Detection v0.1\GPP Vision 1.0\GPP Vision 1.0.idb
+# NAME :         C:\Users\9XRXSW1\source\repos\hamwich3\Bubble-Leak-Detection\GPP Vision 1.0\GPP Vision 1.0.idb
 # VERSION :      R10.2a
-# TIME/DATE :    14:26:1 3/12/2020
+# TIME/DATE :    14:42:37 3/18/2020
 # 
 # INSTRUCTIONS : This file gets written with the corresponding IDB file.
 #                It is not read by PAC Control. It may be used by other programs to 
@@ -152,6 +152,8 @@ TAG1,bPressurize                                       ,1    ,00000000,00000000,
 TAG1,bStartTest                                        ,22   ,00000000,00000000,00000000,00000008,0    ,0   
 TAG1,bStopTest                                         ,29   ,00000000,00000000,00000000,00000008,0    ,0   
 TAG1,bTareVisionSystem                                 ,71   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bTestComplete                                     ,81   ,00000000,00000000,00000000,00000008,0    ,0   
+TAG1,bTestCompleteLast                                 ,82   ,00000000,00000000,00000000,00000008,0    ,0   
 TAG1,bTesting                                          ,28   ,00000000,00000000,00000000,00000008,0    ,0   
 TAG1,bVisionRunning                                    ,68   ,00000000,00000000,00000000,00000008,0    ,0   
 TAG1,bVisionSystemAbort                                ,70   ,00000000,00000000,00000000,00000008,0    ,0   

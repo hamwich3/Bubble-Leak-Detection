@@ -53,7 +53,6 @@ namespace Bubble_Leak_Detection
         {
             InitializeComponent();
             LeakLocator = leak;
-            //CylinderLocator = cylinder;
             LeakClassifier = classifier;
             PACIP = pacip;
             this.TopMost = false;
@@ -66,6 +65,7 @@ namespace Bubble_Leak_Detection
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Sectors.WriteROIs();
             if (PAC != null) PAC.CloseDispose();
             keepImageProcessingThreadsAlive = false;
             CloseDisposeCamera();
@@ -169,6 +169,18 @@ namespace Bubble_Leak_Detection
         private void PAC_StopTakeThreshold(object source, EventArgs e)
         {
 
+        }
+
+        private void PAC_TestCompleted(object source, EventArgs e)
+        {
+            cyl1.Fail = PAC.bFail1 == 1;
+            cyl2.Fail = PAC.bFail2 == 1;
+            cyl3.Fail = PAC.bFail3 == 1;
+            cyl4.Fail = PAC.bFail4 == 1;
+            cyl5.Fail = PAC.bFail5 == 1;
+            cyl6.Fail = PAC.bFail6 == 1;
+            cyl7.Fail = PAC.bFail7 == 1;
+            cyl8.Fail = PAC.bFail8 == 1;
         }
 
         private void BuildStrings()
@@ -1051,56 +1063,48 @@ namespace Bubble_Leak_Detection
 
         private void btnFail1_Click(object sender, EventArgs e)
         {
-            cyl1.LeakVerifiedCount = cyl1.FailThresh;
             cyl1.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail1", false, 1);
         }
 
         private void btnFail2_Click(object sender, EventArgs e)
         {
-            cyl2.LeakVerifiedCount = cyl2.FailThresh;
             cyl2.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail2", false, 1);
         }
 
         private void btnFail3_Click(object sender, EventArgs e)
         {
-            cyl3.LeakVerifiedCount = cyl3.FailThresh;
             cyl3.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail3", false, 1);
         }
 
         private void btnFail4_Click(object sender, EventArgs e)
         {
-            cyl4.LeakVerifiedCount = cyl4.FailThresh;
             cyl4.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail4", false, 1);
         }
 
         private void btnFail5_Click(object sender, EventArgs e)
         {
-            cyl5.LeakVerifiedCount = cyl5.FailThresh;
             cyl5.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail5", false, 1);
         }
 
         private void btnFail6_Click(object sender, EventArgs e)
         {
-            cyl6.LeakVerifiedCount = cyl6.FailThresh;
             cyl6.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail6", false, 1);
         }
 
         private void btnFail7_Click(object sender, EventArgs e)
         {
-            cyl7.LeakVerifiedCount = cyl7.FailThresh;
             cyl7.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail7", false, 1);
         }
 
         private void btnFail8_Click(object sender, EventArgs e)
         {
-            cyl8.LeakVerifiedCount = cyl8.FailThresh;
             cyl8.Fail = true;
             PAC.pac.Write32BitIntegerVariable("bFail8", false, 1);
         }

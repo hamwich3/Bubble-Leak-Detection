@@ -24,14 +24,14 @@ namespace Bubble_Leak_Detection
         private string IP = String.Empty;
 
         //write
-        Int32 bFail1 = 0;
-        Int32 bFail2 = 0;
-        Int32 bFail3 = 0;
-        Int32 bFail4 = 0;
-        Int32 bFail5 = 0;
-        Int32 bFail6 = 0;
-        Int32 bFail7 = 0;
-        Int32 bFail8 = 0;
+        public Int32 bFail1 = 0;
+        public Int32 bFail2 = 0;
+        public Int32 bFail3 = 0;
+        public Int32 bFail4 = 0;
+        public Int32 bFail5 = 0;
+        public Int32 bFail6 = 0;
+        public Int32 bFail7 = 0;
+        public Int32 bFail8 = 0;
 
         //read
         public Int32 bPressurize = 0;
@@ -41,13 +41,13 @@ namespace Bubble_Leak_Detection
         public float fPressure = 0;
         public float fPercTargetPressure = 0;
         public Int32 bTareVisionSystem = 0;
+        public Int32 bTestComplete = 0;
 
         int iHeadDownLast = 0;
         int bTestingLast = 0;
         int bTareVisionSystemLast = 0;
         int bPressurizeLast = 0;
-        bool startTakeThresh = false;
-        bool stopTakeThresh = false;
+        int bTestCompleteLast = 0;
 
         public delegate void EventHandler(object source, EventArgs e);
 
@@ -56,6 +56,7 @@ namespace Bubble_Leak_Detection
         public event EventHandler StopTakeThreshold;
         public event EventHandler StartTest;
         public event EventHandler StopTest;
+        public event EventHandler TestCompleted;
 
         public Opto22Comm(string settingsPath)
         {
@@ -66,9 +67,6 @@ namespace Bubble_Leak_Detection
             {
                 Connected = true;
                 StartReadThread();
-                watchdogTimer = new System.Timers.Timer(1000);
-                watchdogTimer.Elapsed += WatchdogTimer_Elapsed;
-                watchdogTimer.Start();
             }
         }
 
@@ -98,11 +96,6 @@ namespace Bubble_Leak_Detection
             }
         }
 
-        private void WatchdogTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            //if (Connected) pac.Write32BitIntegerVariable("bVisionRunning", false, 1);
-        }
-
         private void StartReadThread()
         {
             if (readThread != null) System.Windows.Forms.MessageBox.Show("PAC read thread already assigned!");
@@ -119,6 +112,16 @@ namespace Bubble_Leak_Detection
                     tagReadArray[4].GetData(out fPressure);
                     tagReadArray[5].GetData(out bTareVisionSystem);
                     tagReadArray[6].GetData(out fPercTargetPressure);
+                    tagReadArray[7].GetData(out bTestComplete);
+                    tagReadArray[8].GetData(out bFail1);
+                    tagReadArray[9].GetData(out bFail2);
+                    tagReadArray[10].GetData(out bFail3);
+                    tagReadArray[11].GetData(out bFail4);
+                    tagReadArray[12].GetData(out bFail5);
+                    tagReadArray[13].GetData(out bFail6);
+                    tagReadArray[14].GetData(out bFail7);
+                    tagReadArray[15].GetData(out bFail8);
+
 
                     if (bTesting == 1 && bTestingLast == 0)
                     {
@@ -153,6 +156,13 @@ namespace Bubble_Leak_Detection
                         StopTest?.Invoke(this, new EventArgs());
                     }
                     bPressurizeLast = bPressurize;
+
+                    if (bTestComplete == 1 && bTestCompleteLast == 0)
+                    {
+                        TestCompleted?.Invoke(this, new EventArgs());
+                    }
+                    bTestCompleteLast = bTestComplete;
+
                     Thread.Sleep(250);
                 }
             });
@@ -175,7 +185,7 @@ namespace Bubble_Leak_Detection
 
         private void InitReadTags()
         {
-            tagReadArray = Controller.NewItemList(7);
+            tagReadArray = Controller.NewItemList(16);
             tagReadArray[0].SetRead("bPressurize", Controller.Item.eItemTypes.integer32);
             tagReadArray[1].SetRead("bAirFill", Controller.Item.eItemTypes.integer32);
             tagReadArray[2].SetRead("iHeadDown", Controller.Item.eItemTypes.integer32);
@@ -183,6 +193,16 @@ namespace Bubble_Leak_Detection
             tagReadArray[4].SetRead("fPressure", Controller.Item.eItemTypes.float32);
             tagReadArray[5].SetRead("bTareVisionSystem", Controller.Item.eItemTypes.integer32);
             tagReadArray[6].SetRead("fPercTargetPressure", Controller.Item.eItemTypes.float32);
+            tagReadArray[7].SetRead("bTestComplete", Controller.Item.eItemTypes.integer32);
+
+            tagReadArray[8].SetRead("bFail1", Controller.Item.eItemTypes.integer32);
+            tagReadArray[9].SetRead("bFail2", Controller.Item.eItemTypes.integer32);
+            tagReadArray[10].SetRead("bFail3", Controller.Item.eItemTypes.integer32);
+            tagReadArray[11].SetRead("bFail4", Controller.Item.eItemTypes.integer32);
+            tagReadArray[12].SetRead("bFail5", Controller.Item.eItemTypes.integer32);
+            tagReadArray[13].SetRead("bFail6", Controller.Item.eItemTypes.integer32);
+            tagReadArray[14].SetRead("bFail7", Controller.Item.eItemTypes.integer32);
+            tagReadArray[15].SetRead("bFail8", Controller.Item.eItemTypes.integer32);
 
             stringReadArray = Controller.NewItemList(16);
 

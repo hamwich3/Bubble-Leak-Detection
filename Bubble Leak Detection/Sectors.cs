@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
 
@@ -119,11 +120,55 @@ namespace Bubble_Leak_Detection
         static ContrastStretch normalize1 = new ContrastStretch();
         static ContrastStretch normalize2 = new ContrastStretch();
 
+        //public static void Initialize()
+        //{
+        //    double halfWidth = ImageSize.Width / 2;
+        //    double halfHeight = ImageSize.Height / 2;
+
+        //    SetCircleFilterBackgroungImages();
+
+        //    Quadrant1Rect = new Rectangle(0, 0, (int)halfWidth, (int)halfHeight);
+        //    Quadrant3Rect = new Rectangle(0, 0, (int)halfWidth, (int)halfHeight);
+        //    Quadrant2Rect = new Rectangle((int)halfWidth, 0, (int)halfWidth, (int)halfHeight);
+        //    Quadrant4Rect = new Rectangle((int)halfWidth, 0, (int)halfWidth, (int)halfHeight);
+        //    Quadrant5Rect = new Rectangle(0, (int)halfHeight, (int)halfWidth, (int)halfHeight);
+        //    Quadrant7Rect = new Rectangle(0, (int)halfHeight, (int)halfWidth, (int)halfHeight);
+        //    Quadrant6Rect = new Rectangle((int)halfWidth, (int)halfHeight, (int)halfWidth, (int)halfHeight);
+        //    Quadrant8Rect = new Rectangle((int)halfWidth, (int)halfHeight, (int)halfWidth, (int)halfHeight);
+
+        //    float x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
+        //    float y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
+        //    Region1 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        //    Region3 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+
+        //    x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
+        //    y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
+        //    Region2 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        //    Region4 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+
+        //    x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
+        //    y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
+        //    Region5 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        //    Region7 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+
+        //    x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
+        //    y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
+        //    Region6 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        //    Region8 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        //}
+
         public static void Initialize()
         {
+
             double halfWidth = ImageSize.Width / 2;
             double halfHeight = ImageSize.Height / 2;
 
+            int radius;
+            Point[] points;
+
+            ReadROIs(out radius, out points);
+
+            RegionRadius = radius;
             SetCircleFilterBackgroungImages();
 
             Quadrant1Rect = new Rectangle(0, 0, (int)halfWidth, (int)halfHeight);
@@ -135,25 +180,107 @@ namespace Bubble_Leak_Detection
             Quadrant6Rect = new Rectangle((int)halfWidth, (int)halfHeight, (int)halfWidth, (int)halfHeight);
             Quadrant8Rect = new Rectangle((int)halfWidth, (int)halfHeight, (int)halfWidth, (int)halfHeight);
 
-            float x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
-            float y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
-            Region1 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-            Region3 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+            Region1 = new Rectangle(points[0].X, points[0].Y, RegionSize.Width, RegionSize.Height);
+            Region2 = new Rectangle(points[1].X, points[1].Y, RegionSize.Width, RegionSize.Height);
+            Region3 = new Rectangle(points[2].X, points[2].Y, RegionSize.Width, RegionSize.Height);
+            Region4 = new Rectangle(points[3].X, points[3].Y, RegionSize.Width, RegionSize.Height);
+            Region5 = new Rectangle(points[4].X, points[4].Y, RegionSize.Width, RegionSize.Height);
+            Region6 = new Rectangle(points[5].X, points[5].Y, RegionSize.Width, RegionSize.Height);
+            Region7 = new Rectangle(points[6].X, points[6].Y, RegionSize.Width, RegionSize.Height);
+            Region8 = new Rectangle(points[7].X, points[7].Y, RegionSize.Width, RegionSize.Height);
 
-            x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
-            y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
-            Region2 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-            Region4 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        }
 
-            x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
-            y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
-            Region5 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-            Region7 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        private static void ReadROIs(out int radius, out Point[] points)
+        {
+            var dir = Directory.GetCurrentDirectory();
+            points = new Point[8];
+            radius = 150;
+            if (!File.Exists(Path.Combine(dir, "rois.xy")))
+            {
+                GenerateWriteROIs();
+            }
+            var data = File.ReadAllLines(Path.Combine(dir, "rois.xy"));
+            try
+            {
+                radius = Convert.ToInt32(data[0]);
+                for (int i = 0; i < 7; i++)
+                {
+                    points[i].X = Convert.ToInt32(data[i + 1]);
+                    points[i].Y = Convert.ToInt32(data[i + 2]);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
 
-            x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
-            y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
-            Region6 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-            Region8 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
+        }
+
+        private static void GenerateWriteROIs()
+        {
+            int radius = 150;
+            float r1_3x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
+            float r1_3y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
+
+            float r2_4x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
+            float r2_4y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
+
+            float r5_7x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
+            float r5_7y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
+
+            float r6_8x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
+            float r6_8y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
+
+            string[] data = new string[17];
+
+            data[0] = radius.ToString();
+            data[1] = ((int)r1_3x).ToString();
+            data[2] = ((int)r1_3y).ToString();
+            data[3] = ((int)r2_4x).ToString();
+            data[4] = ((int)r2_4x).ToString();
+            data[5] = ((int)r1_3x).ToString();
+            data[6] = ((int)r1_3x).ToString();
+            data[7] = ((int)r2_4x).ToString();
+            data[8] = ((int)r2_4x).ToString();
+            data[9] = ((int)r5_7x).ToString();
+            data[10] = ((int)r5_7x).ToString();
+            data[11] = ((int)r6_8x).ToString();
+            data[12] = ((int)r6_8x).ToString();
+            data[13] = ((int)r5_7x).ToString();
+            data[14] = ((int)r5_7x).ToString();
+            data[15] = ((int)r6_8x).ToString();
+            data[16] = ((int)r6_8x).ToString();
+
+            var dir = Directory.GetCurrentDirectory();
+            File.WriteAllLines(Path.Combine(dir, "rois.xy"), data);
+
+        }
+
+        public static void WriteROIs()
+        {
+            string[] data = new string[17];
+
+            data[0] = RegionRadius.ToString();
+            data[1] = Region1.X.ToString();
+            data[2] = Region1.Y.ToString();
+            data[3] = Region2.X.ToString();
+            data[4] = Region2.Y.ToString();
+            data[5] = Region3.X.ToString();
+            data[6] = Region3.Y.ToString();
+            data[7] = Region4.X.ToString();
+            data[8] = Region4.Y.ToString();
+            data[9] = Region5.X.ToString();
+            data[10] = Region5.Y.ToString();
+            data[11] = Region6.X.ToString();
+            data[12] = Region6.Y.ToString();
+            data[13] = Region7.X.ToString();
+            data[14] = Region7.Y.ToString();
+            data[15] = Region8.X.ToString();
+            data[16] = Region8.Y.ToString();
+
+            var dir = Directory.GetCurrentDirectory();
+            File.WriteAllLines(Path.Combine(dir, "rois.xy"), data);
         }
 
         private static void setBitmap(ref Bitmap bmp, Bitmap value)

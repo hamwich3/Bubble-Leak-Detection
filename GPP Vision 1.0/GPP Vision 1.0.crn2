@@ -27,6 +27,8 @@
 0 IVAR ^bStartTest
 0 IVAR ^bStopTest
 0 IVAR ^bTareVisionSystem
+0 IVAR ^bTestComplete
+0 IVAR ^bTestCompleteLast
 0 IVAR ^bTesting
 0 IVAR ^bVisionRunning
 0 IVAR ^bVisionSystemAbort

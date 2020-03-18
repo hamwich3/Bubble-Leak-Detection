@@ -21,8 +21,6 @@ namespace Bubble_Leak_Detection
                 if (LeakLocated)
                 {
                     if (TestActive) LeakLocatedCount++;
-                    //Maybe = LeakLocatedCount > MaybeThreshold;
-                    //Fail = LeakLocatedCount > FailThresh;
                 }
             }
         }
@@ -36,9 +34,12 @@ namespace Bubble_Leak_Detection
                 LeakVerified = value > ClassificationThreshold;
                 if (LeakVerified)
                 {
-                    if (TestActive) LeakVerifiedCount++;
-                    Maybe = LeakVerifiedCount > MaybeThreshold;
-                    Fail = LeakVerifiedCount >= FailThresh;
+                    if (TestActive)
+                    {
+                        LeakVerifiedCount++;
+                        if (LeakVerifiedCount > MaybeThreshold) Maybe = true;
+                        if (LeakVerifiedCount >= FailThresh) Fail = true;
+                    }
                 }
             }
         }

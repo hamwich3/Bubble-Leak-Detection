@@ -104,6 +104,10 @@
 41 LINE.NUM 0 ^oFill @! 
 42 LINE.NUM THEN 
 44 LINE.NUM ^oFill @@ ^oFillLast @! 
+46 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @@ 0 = LAND  IF 
+47 LINE.NUM 0 ^oRaise @! 
+48 LINE.NUM THEN 
+49 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @! 
 -4 JUMP ;
 : 0_15
 1 LINE.NUM 5  DELAY 

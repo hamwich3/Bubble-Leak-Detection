@@ -29,6 +29,8 @@ CREATE V.ARRAY
 ^bStartTest ,
 ^bStopTest ,
 ^bTareVisionSystem ,
+^bTestComplete ,
+^bTestCompleteLast ,
 ^bTesting ,
 ^bVisionRunning ,
 ^bVisionSystemAbort ,
@@ -178,6 +180,8 @@ CONFIG_PORTS
 0 ^bStartTest @!
 0 ^bStopTest @!
 0 ^bTareVisionSystem @!
+0 ^bTestComplete @!
+0 ^bTestCompleteLast @!
 0 ^bTesting @!
 0 ^bVisionRunning @!
 0 ^bVisionSystemAbort @!
