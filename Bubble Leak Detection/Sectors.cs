@@ -120,43 +120,6 @@ namespace Bubble_Leak_Detection
         static ContrastStretch normalize1 = new ContrastStretch();
         static ContrastStretch normalize2 = new ContrastStretch();
 
-        //public static void Initialize()
-        //{
-        //    double halfWidth = ImageSize.Width / 2;
-        //    double halfHeight = ImageSize.Height / 2;
-
-        //    SetCircleFilterBackgroungImages();
-
-        //    Quadrant1Rect = new Rectangle(0, 0, (int)halfWidth, (int)halfHeight);
-        //    Quadrant3Rect = new Rectangle(0, 0, (int)halfWidth, (int)halfHeight);
-        //    Quadrant2Rect = new Rectangle((int)halfWidth, 0, (int)halfWidth, (int)halfHeight);
-        //    Quadrant4Rect = new Rectangle((int)halfWidth, 0, (int)halfWidth, (int)halfHeight);
-        //    Quadrant5Rect = new Rectangle(0, (int)halfHeight, (int)halfWidth, (int)halfHeight);
-        //    Quadrant7Rect = new Rectangle(0, (int)halfHeight, (int)halfWidth, (int)halfHeight);
-        //    Quadrant6Rect = new Rectangle((int)halfWidth, (int)halfHeight, (int)halfWidth, (int)halfHeight);
-        //    Quadrant8Rect = new Rectangle((int)halfWidth, (int)halfHeight, (int)halfWidth, (int)halfHeight);
-
-        //    float x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
-        //    float y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
-        //    Region1 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-        //    Region3 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-
-        //    x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
-        //    y = (ImageSize.Height / 4) - (RegionSize.Height / 2);
-        //    Region2 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-        //    Region4 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-
-        //    x = (ImageSize.Width / 4) - (RegionSize.Width / 2);
-        //    y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
-        //    Region5 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-        //    Region7 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-
-        //    x = ((3 * ImageSize.Width / 4)) - (RegionSize.Width / 2);
-        //    y = ((3 * ImageSize.Height / 4)) - (RegionSize.Height / 2);
-        //    Region6 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-        //    Region8 = new Rectangle((int)x, (int)y, RegionSize.Width, RegionSize.Height);
-        //}
-
         public static void Initialize()
         {
 
@@ -206,8 +169,8 @@ namespace Bubble_Leak_Detection
                 radius = Convert.ToInt32(data[0]);
                 for (int i = 0; i <= 7; i++)
                 {
-                    points[i].X = Convert.ToInt32(data[2*i + 1]);
-                    points[i].Y = Convert.ToInt32(data[2*i + 2]);
+                    points[i].X = Convert.ToInt32(data[2 * i + 1]);
+                    points[i].Y = Convert.ToInt32(data[2 * i + 2]);
                 }
             }
             catch (Exception ex)
@@ -238,19 +201,19 @@ namespace Bubble_Leak_Detection
             data[1] = ((int)r1_3x).ToString();
             data[2] = ((int)r1_3y).ToString();
             data[3] = ((int)r2_4x).ToString();
-            data[4] = ((int)r2_4x).ToString();
+            data[4] = ((int)r2_4y).ToString();
             data[5] = ((int)r1_3x).ToString();
-            data[6] = ((int)r1_3x).ToString();
+            data[6] = ((int)r1_3y).ToString();
             data[7] = ((int)r2_4x).ToString();
-            data[8] = ((int)r2_4x).ToString();
+            data[8] = ((int)r2_4y).ToString();
             data[9] = ((int)r5_7x).ToString();
-            data[10] = ((int)r5_7x).ToString();
+            data[10] = ((int)r5_7y).ToString();
             data[11] = ((int)r6_8x).ToString();
-            data[12] = ((int)r6_8x).ToString();
+            data[12] = ((int)r6_8y).ToString();
             data[13] = ((int)r5_7x).ToString();
-            data[14] = ((int)r5_7x).ToString();
+            data[14] = ((int)r5_7y).ToString();
             data[15] = ((int)r6_8x).ToString();
-            data[16] = ((int)r6_8x).ToString();
+            data[16] = ((int)r6_8y).ToString();
 
             var dir = Directory.GetCurrentDirectory();
             File.WriteAllLines(Path.Combine(dir, "rois.xy"), data);
