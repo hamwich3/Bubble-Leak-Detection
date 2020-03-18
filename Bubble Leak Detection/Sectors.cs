@@ -204,10 +204,10 @@ namespace Bubble_Leak_Detection
             try
             {
                 radius = Convert.ToInt32(data[0]);
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i <= 7; i++)
                 {
-                    points[i].X = Convert.ToInt32(data[i + 1]);
-                    points[i].Y = Convert.ToInt32(data[i + 2]);
+                    points[i].X = Convert.ToInt32(data[2*i + 1]);
+                    points[i].Y = Convert.ToInt32(data[2*i + 2]);
                 }
             }
             catch (Exception ex)

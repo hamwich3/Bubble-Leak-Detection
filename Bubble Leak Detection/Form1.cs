@@ -107,6 +107,7 @@ namespace Bubble_Leak_Detection
             InitializeImaging(icImagingControl1);
             InitializeImaging(icImagingControl2);
             Sectors.Initialize();
+            tbRadius.Text = Sectors.RegionRadius.ToString();
             StartCameras();
             StartImageThreads();
             PAC.StopTakeThreshold += PAC_StopTakeThreshold;

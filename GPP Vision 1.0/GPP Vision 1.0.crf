@@ -45,6 +45,8 @@ _END NEW $$$.RUN
 0 IVAR ^bStartTest
 0 IVAR ^bStopTest
 0 IVAR ^bTareVisionSystem
+0 IVAR ^bTestComplete
+0 IVAR ^bTestCompleteLast
 0 IVAR ^bTesting
 0 IVAR ^bVisionRunning
 0 IVAR ^bVisionSystemAbort
@@ -375,6 +377,10 @@ T;
 41 LINE.NUM 0 ^oFill @! 
 42 LINE.NUM THEN 
 44 LINE.NUM ^oFill @@ ^oFillLast @! 
+46 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @@ 0 = LAND  IF 
+47 LINE.NUM 0 ^oRaise @! 
+48 LINE.NUM THEN 
+49 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @! 
 -4 JUMP ;
 : 0_15
 1 LINE.NUM 5  DELAY 
@@ -475,23 +481,24 @@ T;
 1 LINE.NUM 0 ^oRaise @! 
 2 LINE.NUM 1 ^oLower @! 
 3 LINE.NUM 1 ^oBleed @! 
-5 LINE.NUM 0 ^nAirPressCounts @! 
-6 LINE.NUM 0 ^nAbovePressureCounts @! 
-7 LINE.NUM 0 ^bBumpPressure @! 
-9 LINE.NUM 200  DELAY 
-10 LINE.NUM ^iHeadDown @@ IF 
-11 LINE.NUM ^nHeadDownCounts @@ 1 +  ^nHeadDownCounts @! 
-12 LINE.NUM ELSE 
-13 LINE.NUM 0 ^nHeadDownCounts @! 
-14 LINE.NUM THEN 
-16 LINE.NUM 0 ^bFail1 @! 
-17 LINE.NUM 0 ^bFail2 @! 
-18 LINE.NUM 0 ^bFail3 @! 
-19 LINE.NUM 0 ^bFail4 @! 
-20 LINE.NUM 0 ^bFail5 @! 
-21 LINE.NUM 0 ^bFail6 @! 
-22 LINE.NUM 0 ^bFail7 @! 
-23 LINE.NUM 0 ^bFail8 @! 
+4 LINE.NUM 0 ^bTestComplete @! 
+6 LINE.NUM 0 ^nAirPressCounts @! 
+7 LINE.NUM 0 ^nAbovePressureCounts @! 
+8 LINE.NUM 0 ^bBumpPressure @! 
+10 LINE.NUM 200  DELAY 
+11 LINE.NUM ^iHeadDown @@ IF 
+12 LINE.NUM ^nHeadDownCounts @@ 1 +  ^nHeadDownCounts @! 
+13 LINE.NUM ELSE 
+14 LINE.NUM 0 ^nHeadDownCounts @! 
+15 LINE.NUM THEN 
+17 LINE.NUM 0 ^bFail1 @! 
+18 LINE.NUM 0 ^bFail2 @! 
+19 LINE.NUM 0 ^bFail3 @! 
+20 LINE.NUM 0 ^bFail4 @! 
+21 LINE.NUM 0 ^bFail5 @! 
+22 LINE.NUM 0 ^bFail6 @! 
+23 LINE.NUM 0 ^bFail7 @! 
+24 LINE.NUM 0 ^bFail8 @! 
 11 JUMP ;
 : 1_2
 1 LINE.NUM 1 ^bAirFill @! 
@@ -561,11 +568,10 @@ T;
 9 JUMP ;
 : 1_31
 1 LINE.NUM 0 ^oLower @! 
-2 LINE.NUM 1 ^oRaise @! 
-3 LINE.NUM 0 ^bStartTest @! 
-4 LINE.NUM 0 ^bTesting @! 
-5 LINE.NUM 0 ^bStopTest @! 
-7 LINE.NUM 10000  DELAY 
+2 LINE.NUM 0 ^bStartTest @! 
+3 LINE.NUM 0 ^bTesting @! 
+4 LINE.NUM 0 ^bStopTest @! 
+6 LINE.NUM 10000  DELAY 
 13 JUMP ;
 : 1_46
 1 LINE.NUM 1 ^bBumpPressure @! 
@@ -716,6 +722,8 @@ CREATE V.ARRAY
 ^bStartTest ,
 ^bStopTest ,
 ^bTareVisionSystem ,
+^bTestComplete ,
+^bTestCompleteLast ,
 ^bTesting ,
 ^bVisionRunning ,
 ^bVisionSystemAbort ,
@@ -865,6 +873,8 @@ CONFIG_PORTS
 0 ^bStartTest @!
 0 ^bStopTest @!
 0 ^bTareVisionSystem @!
+0 ^bTestComplete @!
+0 ^bTestCompleteLast @!
 0 ^bTesting @!
 0 ^bVisionRunning @!
 0 ^bVisionSystemAbort @!
@@ -967,9 +977,9 @@ T;
    CLEARERRORS
    &_INIT_IO START.T DROP
    ;
-: DATESTAMP ." 03/12/20 " ;
-: TIMESTAMP ." 14:26:01 " ;
-: CRCSTAMP  ." 00191E66513154FF949C6D424305FFE4 " ;
+: DATESTAMP ." 03/18/20 " ;
+: TIMESTAMP ." 15:50:05 " ;
+: CRCSTAMP  ." 6A5235D601ED672E00C84C2A5BD287A0 " ;
 MAKECHECK
 CLEAR.BREAKS
 
