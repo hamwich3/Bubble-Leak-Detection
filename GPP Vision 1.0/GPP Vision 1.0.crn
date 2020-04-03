@@ -367,7 +367,7 @@ T;
 42 LINE.NUM THEN 
 44 LINE.NUM ^oFill @@ ^oFillLast @! 
 46 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @@ 0 = LAND  IF 
-47 LINE.NUM 0 ^oRaise @! 
+47 LINE.NUM 1 ^oRaise @! 
 48 LINE.NUM THEN 
 49 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @! 
 -4 JUMP ;
@@ -966,8 +966,8 @@ T;
    CLEARERRORS
    &_INIT_IO START.T DROP
    ;
-: DATESTAMP ." 03/18/20 " ;
-: TIMESTAMP ." 15:50:05 " ;
+: DATESTAMP ." 04/01/20 " ;
+: TIMESTAMP ." 14:55:10 " ;
 : CRCSTAMP  ." 00112233445566778899AABBCCDDEEFF " ;
 MAKECHECK
 CLEAR.BREAKS

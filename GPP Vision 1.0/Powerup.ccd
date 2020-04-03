@@ -105,7 +105,7 @@
 42 LINE.NUM THEN 
 44 LINE.NUM ^oFill @@ ^oFillLast @! 
 46 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @@ 0 = LAND  IF 
-47 LINE.NUM 0 ^oRaise @! 
+47 LINE.NUM 1 ^oRaise @! 
 48 LINE.NUM THEN 
 49 LINE.NUM ^bTestComplete @@ ^bTestCompleteLast @! 
 -4 JUMP ;

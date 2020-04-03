@@ -114,6 +114,7 @@ namespace Bubble_Leak_Detection
             PAC.StartTakeThreshold += PAC_StartTakeThreshold;
             PAC.StopTest += PAC_StopTest;
             PAC.StartTest += PAC_StartTest;
+            PAC.TestCompleted += PAC_TestCompleted;
             icImagingControl1.ImageAvailable += icImagingControl1_ImageAvailable;
             icImagingControl2.ImageAvailable += icImagingControl2_ImageAvailable;
             icImagingControl1.OverlayUpdate += icImagingControl1_OverlayUpdate;
@@ -494,11 +495,11 @@ namespace Bubble_Leak_Detection
             if (cyl6.TestActive && cyl6.detections != null && cyl6.LeakLocated) g.DrawRectangle(cyl6.LeakVerified ? leak : highlight, cyl6.detections[0]);
 
             overlay.DrawText(textColor, Sectors.Region1.X + 3, Sectors.Region1.Y + 10 + (Sectors.Region1.Height), cyl1.DisplayText);
-            overlay.DrawText(textColor, Sectors.Region2.X + 3, Sectors.Region2.Y + 10 + (Sectors.Region1.Height), cyl2.DisplayText);
+            overlay.DrawText(textColor, Sectors.Region2.X + 3, Sectors.Region2.Y + 10 + (Sectors.Region2.Height), cyl2.DisplayText);
             overlay.DrawText(textColor, Sectors.Region5.X + 3, Sectors.Region5.Y + 10, cyl5.DisplayText);
             overlay.DrawText(textColor, Sectors.Region6.X + 3, Sectors.Region6.Y + 10, cyl6.DisplayText);
             overlay.DrawText(textColor, Sectors.Region1.X + 3, Sectors.Region1.Y - 35 + (Sectors.Region1.Height), cyl1.SerialText);
-            overlay.DrawText(textColor, Sectors.Region2.X + 3, Sectors.Region2.Y - 35 + (Sectors.Region1.Height), cyl2.SerialText);
+            overlay.DrawText(textColor, Sectors.Region2.X + 3, Sectors.Region2.Y - 35 + (Sectors.Region2.Height), cyl2.SerialText);
             overlay.DrawText(textColor, Sectors.Region5.X + 3, Sectors.Region5.Y - 35, cyl5.SerialText);
             overlay.DrawText(textColor, Sectors.Region6.X + 3, Sectors.Region6.Y - 35, cyl6.SerialText);
             var w = icImagingControl1.ImageActiveBuffer.Bitmap.Width;
@@ -546,12 +547,12 @@ namespace Bubble_Leak_Detection
             if (cyl7.TestActive && cyl7.detections != null && cyl7.LeakLocated) g.DrawRectangle(cyl7.LeakVerified ? leak : highlight, cyl7.detections[0]);
             if (cyl8.TestActive && cyl8.detections != null && cyl8.LeakLocated) g.DrawRectangle(cyl8.LeakVerified ? leak : highlight, cyl8.detections[0]);
 
-            overlay.DrawText(textColor, Sectors.Region3.X + 3, Sectors.Region3.Y + 10, cyl3.DisplayText);
-            overlay.DrawText(textColor, Sectors.Region4.X + 3, Sectors.Region4.Y + 10, cyl4.DisplayText);
+            overlay.DrawText(textColor, Sectors.Region3.X + 3, Sectors.Region3.Y + 10 + (Sectors.Region3.Height), cyl3.DisplayText);
+            overlay.DrawText(textColor, Sectors.Region4.X + 3, Sectors.Region4.Y + 10 + (Sectors.Region4.Height), cyl4.DisplayText);
             overlay.DrawText(textColor, Sectors.Region7.X + 3, Sectors.Region7.Y + 10, cyl7.DisplayText);
             overlay.DrawText(textColor, Sectors.Region8.X + 3, Sectors.Region8.Y + 10, cyl8.DisplayText);
-            overlay.DrawText(textColor, Sectors.Region3.X + 3, Sectors.Region3.Y - 35, cyl3.SerialText);
-            overlay.DrawText(textColor, Sectors.Region4.X + 3, Sectors.Region4.Y - 35, cyl4.SerialText);
+            overlay.DrawText(textColor, Sectors.Region3.X + 3, Sectors.Region3.Y - 35 + (Sectors.Region3.Height), cyl3.SerialText);
+            overlay.DrawText(textColor, Sectors.Region4.X + 3, Sectors.Region4.Y - 35 + (Sectors.Region4.Height), cyl4.SerialText);
             overlay.DrawText(textColor, Sectors.Region7.X + 3, Sectors.Region7.Y - 35, cyl7.SerialText);
             overlay.DrawText(textColor, Sectors.Region8.X + 3, Sectors.Region8.Y - 35, cyl8.SerialText);
             var w = icImagingControl1.ImageActiveBuffer.Bitmap.Width;
