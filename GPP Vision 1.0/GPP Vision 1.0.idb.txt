@@ -4,7 +4,7 @@
 # ----------------------------------------------------------------
 # NAME :         C:\Users\J20V4J2\Documents\Visual Studio 2017\Projects\Bubble Leak Detection v0.1\GPP Vision 1.0\GPP Vision 1.0.idb
 # VERSION :      R10.2a
-# TIME/DATE :    14:55:10 4/1/2020
+# TIME/DATE :    13:7:21 9/4/2020
 # 
 # INSTRUCTIONS : This file gets written with the corresponding IDB file.
 #                It is not read by PAC Control. It may be used by other programs to 
@@ -200,6 +200,7 @@ TAG1,oRaise                                            ,18   ,00000000,00000000,
 TAG1,oRaiseLast                                        ,73   ,00000000,00000000,00000000,00000008,0    ,0   
 TAG1,oWaterToPump                                      ,15   ,00000000,00000000,00000000,00000008,0    ,0   
 TAG1,utAveragingTimer                                  ,40   ,00000000,00000000,00000000,00002000,0    ,0   
+TAG1,utBleedTimer                                      ,83   ,00000000,00000000,00000000,00002000,0    ,0   
 TAG1,utFillTimeout                                     ,75   ,00000000,00000000,00000000,00002000,0    ,0   
 TAG1,utFlashTimer                                      ,77   ,00000000,00000000,00000000,00002000,0    ,0   
 TAG1,utInc                                             ,24   ,00000000,00000000,00000000,00002000,0    ,0   

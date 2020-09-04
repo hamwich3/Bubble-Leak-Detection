@@ -75,6 +75,7 @@
 0 IVAR ^oRaiseLast
 0 IVAR ^oWaterToPump
 0 UTVAR ^utAveragingTimer
+0 UTVAR ^utBleedTimer
 0 UTVAR ^utFillTimeout
 0 UTVAR ^utFlashTimer
 0 UTVAR ^utInc

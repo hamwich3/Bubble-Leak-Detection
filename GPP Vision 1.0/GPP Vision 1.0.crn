@@ -82,6 +82,7 @@ _END NEW $$$.RUN
 0 IVAR ^oRaiseLast
 0 IVAR ^oWaterToPump
 0 UTVAR ^utAveragingTimer
+0 UTVAR ^utBleedTimer
 0 UTVAR ^utFillTimeout
 0 UTVAR ^utFlashTimer
 0 UTVAR ^utInc
@@ -488,7 +489,7 @@ T;
 22 LINE.NUM 0 ^bFail6 @! 
 23 LINE.NUM 0 ^bFail7 @! 
 24 LINE.NUM 0 ^bFail8 @! 
-11 JUMP ;
+12 JUMP ;
 : 1_2
 1 LINE.NUM 1 ^bAirFill @! 
 2 LINE.NUM 1 ^oBleed @! 
@@ -502,7 +503,7 @@ T;
 11 LINE.NUM 0 ^nAirPressCounts @! 
 12 LINE.NUM THEN 
 14 LINE.NUM 100  DELAY 
-9 JUMP ;
+10 JUMP ;
 : 1_13
 1 LINE.NUM 0 ^bAirFill @! 
 2 LINE.NUM 1 ^bPressurize @! 
@@ -516,7 +517,7 @@ T;
 14 LINE.NUM 0 I>F ^fBoost @! 
 15 LINE.NUM 0 ^nStallCounts @! 
 17 LINE.NUM ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ F/ ^fRegVal @! 
-10 JUMP ;
+11 JUMP ;
 : 1_14
 1 LINE.NUM 1 ^oAirToPump @! 
 3 LINE.NUM ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ ^fBoost @@ F- F/ ^fBoost @@ F+ ^fTargetPressure @@ ^fStopPercent @@ 1.00000000e+002 F/ F* ^fPistonRatio @@ ^fBoost @@ F- F/ 1.29999995e+000 F*  FMIN ^fRegVal @! 
@@ -540,12 +541,12 @@ T;
 24 LINE.NUM THEN 
 25 LINE.NUM THEN 
 27 LINE.NUM 10  DELAY 
-12 JUMP ;
+13 JUMP ;
 : 1_23
 2 LINE.NUM 0 ^nAbovePressureCounts @! 
 3 LINE.NUM 0 ^bBumpPressure @! 
 5 LINE.NUM 10  DELAY 
-12 JUMP ;
+13 JUMP ;
 : 1_26
 1 LINE.NUM 0 ^oBleed @! 
 2 LINE.NUM 0 I>F ^fRegVal @! 
@@ -553,18 +554,19 @@ T;
 4 LINE.NUM 0 ^oWaterToPump @! 
 5 LINE.NUM 0 ^oAirToCylinders @! 
 6 LINE.NUM 0 ^bBumpPressure @! 
-8 LINE.NUM 10  DELAY 
-9 JUMP ;
+7 LINE.NUM 5 I>F ^utBleedTimer @! 
+9 LINE.NUM 10  DELAY 
+10 JUMP ;
 : 1_31
 1 LINE.NUM 0 ^oLower @! 
 2 LINE.NUM 0 ^bStartTest @! 
 3 LINE.NUM 0 ^bTesting @! 
 4 LINE.NUM 0 ^bStopTest @! 
 6 LINE.NUM 10000  DELAY 
-13 JUMP ;
+15 JUMP ;
 : 1_46
 1 LINE.NUM 1 ^bBumpPressure @! 
-5 JUMP ;
+6 JUMP ;
 : 1_49
 1 LINE.NUM 1 ^bTareVisionSystem @! 
 3 LINE.NUM 1000  DELAY 
@@ -572,10 +574,15 @@ T;
 -8 JUMP ;
 : 1_57
 1 LINE.NUM 20  DELAY 
-9 JUMP ;
+10 JUMP ;
 : 1_61
 1 LINE.NUM 1 ^bPressurize @! 
-8 JUMP ;
+9 JUMP ;
+: 1_68
+
+1 LINE.NUM
+  20    DELAY
+4 JUMP ;
 : 1_6
 TRUE
 
@@ -588,7 +595,7 @@ LAND
   ^nAirPressCounts @@ 
   10    >=
 LAND
-IF 6 ELSE -11 THEN JUMP ;
+IF 6 ELSE -12 THEN JUMP ;
 : 1_7
 TRUE
 
@@ -596,14 +603,14 @@ TRUE
   ^nHeadDownCounts @@ 
   10    >=
 LAND
-IF -5 ELSE -13 THEN JUMP ;
+IF -6 ELSE -14 THEN JUMP ;
 : 1_17
 TRUE
 
 1 LINE.NUM
   ^bPressurize @@   0<>
 LAND
-IF -11 ELSE -9 THEN JUMP ;
+IF -12 ELSE -10 THEN JUMP ;
 : 1_18
 TRUE
 
@@ -611,7 +618,7 @@ TRUE
   ^fPercTargetPressure @@ 
   ^fBumpPercent @@   F>
 LAND
-IF -11 ELSE -8 THEN JUMP ;
+IF -12 ELSE -9 THEN JUMP ;
 : 1_27
 TRUE
 
@@ -619,7 +626,7 @@ TRUE
   ^fPressure @@ 
   ^fBleedPressure @@   F>
 LAND
-IF -11 ELSE -10 THEN JUMP ;
+IF -12 ELSE 4 THEN JUMP ;
 : 1_34
 TRUE
 
@@ -639,7 +646,7 @@ TRUE
 1 LINE.NUM
   ^bPressurize @@   0<>
 LAND
-IF -4 ELSE -13 THEN JUMP ;
+IF -4 ELSE -14 THEN JUMP ;
 : 1_52
 TRUE
 
@@ -647,14 +654,21 @@ TRUE
   ^fTargetPressure @@ 
   0.0    F=
 LAND
-IF -9 ELSE -17 THEN JUMP ;
+IF -10 ELSE -18 THEN JUMP ;
 : 1_55
 TRUE
 
 1 LINE.NUM
   ^bPressurize @@   0<>
 LAND
-IF -11 ELSE -15 THEN JUMP ;
+IF -12 ELSE -16 THEN JUMP ;
+: 1_66
+TRUE
+
+1 LINE.NUM
+  ^utBleedTimer   T0=
+LAND
+IF -16 ELSE -11 THEN JUMP ;
 T: T1
 DUMMY
 1_0
@@ -669,6 +683,7 @@ DUMMY
 1_49
 1_57
 1_61
+1_68
 1_6
 1_7
 1_17
@@ -678,6 +693,7 @@ DUMMY
 1_41
 1_52
 1_55
+1_66
 T;
 &RunTest ' T1 SETTASK
 CREATE T.ARRAY
@@ -782,6 +798,7 @@ CREATE V.ARRAY
  0 ,
 CREATE TI.ARRAY
 ^utAveragingTimer ,
+^utBleedTimer ,
 ^utFillTimeout ,
 ^utFlashTimer ,
 ^utInc ,
@@ -909,6 +926,7 @@ CONFIG_PORTS
 0 ^oRaiseLast @!
 0 ^oWaterToPump @!
 0.0 ^utAveragingTimer SetTimer
+0.0 ^utBleedTimer SetTimer
 0.0 ^utFillTimeout SetTimer
 0.0 ^utFlashTimer SetTimer
 0.0 ^utInc SetTimer
@@ -966,8 +984,8 @@ T;
    CLEARERRORS
    &_INIT_IO START.T DROP
    ;
-: DATESTAMP ." 04/01/20 " ;
-: TIMESTAMP ." 14:55:10 " ;
+: DATESTAMP ." 09/04/20 " ;
+: TIMESTAMP ." 13:07:21 " ;
 : CRCSTAMP  ." 00112233445566778899AABBCCDDEEFF " ;
 MAKECHECK
 CLEAR.BREAKS

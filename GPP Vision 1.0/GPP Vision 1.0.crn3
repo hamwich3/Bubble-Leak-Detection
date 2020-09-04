@@ -100,6 +100,7 @@ CREATE V.ARRAY
  0 ,
 CREATE TI.ARRAY
 ^utAveragingTimer ,
+^utBleedTimer ,
 ^utFillTimeout ,
 ^utFlashTimer ,
 ^utInc ,
@@ -227,6 +228,7 @@ CONFIG_PORTS
 0 ^oRaiseLast @!
 0 ^oWaterToPump @!
 0.0 ^utAveragingTimer SetTimer
+0.0 ^utBleedTimer SetTimer
 0.0 ^utFillTimeout SetTimer
 0.0 ^utFlashTimer SetTimer
 0.0 ^utInc SetTimer
